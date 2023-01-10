@@ -12,6 +12,7 @@ import com.example.clever.model.GroupVO
 
 class MainAdapter(val context: Context, val groupList: ArrayList<GroupVO>): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
         val imgMore: ImageView
         val imgState: ImageView
         val tvGroupName: TextView

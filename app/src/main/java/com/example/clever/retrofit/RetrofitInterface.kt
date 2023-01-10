@@ -21,4 +21,14 @@ interface RetrofitInterface {
         @Field("password") password: String
     ): Call<Member>
 
+    @POST("login")
+    fun login(
+
+    ): Call<ResponseBody>
+
+    @GET("getGroup")
+    fun getGroup(
+
+    ): Call<ResponseBody>
+
 }
