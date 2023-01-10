@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.join.JoinActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="클레버"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/joinTvGoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="80dp"
+        android:drawableTint="@color/gray"
+        android:text="이미 아이디가 있으신가요 ?"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/joinImgGoLogin"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/joinTvGoLogin"
+        app:layout_constraintStart_toEndOf="@+id/joinTvGoLogin"
+        app:layout_constraintTop_toTopOf="@+id/joinTvGoLogin"
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+        app:tint="@color/gray" />
+
+    <Button
+        android:id="@+id/joinBtnJoin"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_main"
+        android:text="회원가입하기"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/joinTvGoLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/joinEtPwRe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="비밀번호 재입력"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinBtnJoin"
+        app:layout_constraintEnd_toEndOf="@+id/joinBtnJoin"
+        app:layout_constraintStart_toStartOf="@+id/joinBtnJoin" />
+
+    <EditText
+        android:id="@+id/joinEtPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinEtPwRe"
+        app:layout_constraintEnd_toEndOf="@+id/joinEtPwRe"
+        app:layout_constraintStart_toStartOf="@+id/joinEtPwRe" />
+
+    <EditText
+        android:id="@+id/joinEtPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="휴대폰번호"
+        android:inputType="number"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinEtPw"
+        app:layout_constraintEnd_toEndOf="@+id/joinEtPw"
+        app:layout_constraintStart_toStartOf="@+id/joinEtPw" />
+
+    <EditText
+        android:id="@+id/joinEtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="이름"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinEtPhone"
+        app:layout_constraintEnd_toEndOf="@+id/joinEtPhone"
+        app:layout_constraintStart_toStartOf="@+id/joinEtPhone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
