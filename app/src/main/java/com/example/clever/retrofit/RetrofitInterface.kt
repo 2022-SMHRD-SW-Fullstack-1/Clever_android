@@ -10,7 +10,7 @@ import retrofit2.http.POST
 
 interface RetrofitInterface {
 
-    @GET("hello/android")
+    @GET("android/hello")
     fun hello(): Call<ResponseBody>
 
     @FormUrlEncoded
