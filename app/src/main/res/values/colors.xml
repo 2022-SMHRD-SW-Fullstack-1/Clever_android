@@ -11,4 +11,5 @@
     <color name="gray">#B3B3B3</color>
 
     <color name="mainColor">#3A4CA8</color>
+    <color name="calendarSelect">#FFF29F</color>
 </resources>

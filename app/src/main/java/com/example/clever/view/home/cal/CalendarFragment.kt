@@ -5,28 +5,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.clever.R
+import android.widget.Toast
 import com.example.clever.databinding.FragmentCalendarBinding
-import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
-
-private lateinit var binding: FragmentCalendarBinding
+import com.prolificinteractive.materialcalendarview.CalendarDay
 
 class CalendarFragment : Fragment() {
+
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_calendar, container, false)
-        binding = FragmentCalendarBinding.inflate(layoutInflater)
+        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
+        // 초기화시 오늘 날짜 선택
+        binding.calendarCv.selectedDate = CalendarDay.today()
 
-//
-//        binding.calendarview.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.custom_months)))
-//        binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)))
+        // 달력 요일별 색, 선택시 색
+        binding.calendarCv.addDecorator(WeekdaysDecorator())
+        binding.calendarCv.addDecorator(SaturdayDecorator())
+        binding.calendarCv.addDecorator(SundayDecorator())
+        binding.calendarCv.addDecorator(CalendarDecorator())
+        binding.calendarCv.addDecorator(SelectDecorator(requireActivity()))
 
-        return view
+        // 날짜 클릭 이벤트
+        binding.calendarCv.setOnDateChangedListener { widget, date, selected ->
+            var year = date.year.toString()
+            var month = (date.month+1).toString()
+            var day = date.day.toString()
+
+            if(month.toInt() < 10) month = "0$month"
+            if(day.toInt() < 10) day = "0$day"
+
+            var selectMsg = "${year}년 ${month}월 ${day}일"
+
+            Toast.makeText(context, selectMsg, Toast.LENGTH_SHORT).show()
+        }
+
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
