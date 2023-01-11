@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tabHome1"
+        android:icon="@drawable/todolist"
+        android:title="할 일 체크" />
+    <item
+        android:id="@+id/tabHome2"
+        android:icon="@drawable/notice"
+        android:title="전달사항" />
+    <item
+        android:id="@+id/tabHome3"
+        android:icon="@drawable/calendar_month"
+        android:title="근무일정" />
+    <item
+        android:id="@+id/tabHome4"
+        android:icon="@drawable/more_view"
+        android:title="더보기" />
+</menu>

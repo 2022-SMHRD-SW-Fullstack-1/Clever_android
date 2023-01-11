@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.join.JoinActivity">
+    tools:context=".view.JoinActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -62,11 +62,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/input"
+        android:background="@drawable/background_radius"
         android:ems="10"
         android:hint="비밀번호 재입력"
         android:inputType="textPassword"
         android:padding="8dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joinBtnJoin"
         app:layout_constraintEnd_toEndOf="@+id/joinBtnJoin"
         app:layout_constraintStart_toStartOf="@+id/joinBtnJoin" />
@@ -76,41 +77,45 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/input"
+        android:background="@drawable/background_radius"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
         android:padding="8dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joinEtPwRe"
         app:layout_constraintEnd_toEndOf="@+id/joinEtPwRe"
         app:layout_constraintStart_toStartOf="@+id/joinEtPwRe" />
-
-    <EditText
-        android:id="@+id/joinEtPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/input"
-        android:ems="10"
-        android:hint="휴대폰번호"
-        android:inputType="number"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/joinEtPw"
-        app:layout_constraintEnd_toEndOf="@+id/joinEtPw"
-        app:layout_constraintStart_toStartOf="@+id/joinEtPw" />
 
     <EditText
         android:id="@+id/joinEtName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/input"
+        android:background="@drawable/background_radius"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/joinEtPhone"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinEtPw"
         app:layout_constraintEnd_toEndOf="@+id/joinEtPhone"
         app:layout_constraintStart_toStartOf="@+id/joinEtPhone" />
+
+    <EditText
+        android:id="@+id/joinEtPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_radius"
+        android:ems="10"
+        android:hint="휴대폰번호"
+        android:inputType="number"
+        android:padding="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/joinEtName"
+        app:layout_constraintEnd_toEndOf="@+id/joinEtPw"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/joinEtPw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
