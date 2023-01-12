@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.clever.R
 import com.example.clever.databinding.FragmentCalendarBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
+import com.prolificinteractive.materialcalendarview.format.TitleFormatter
 
 class CalendarFragment : Fragment() {
 
@@ -29,6 +32,14 @@ class CalendarFragment : Fragment() {
         binding.calendarCv.addDecorator(SundayDecorator())
         binding.calendarCv.addDecorator(CalendarDecorator())
         binding.calendarCv.addDecorator(SelectDecorator(requireActivity()))
+
+        // header, 요일 한글로 변경
+        binding.calendarCv.setTitleFormatter(object : TitleFormatter{
+            override fun format(day: CalendarDay?): CharSequence {
+                return "${day!!.year}년 ${day.month+1}월"
+            }
+        })
+        binding.calendarCv.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)));
 
         // 날짜 클릭 이벤트
         binding.calendarCv.setOnDateChangedListener { widget, date, selected ->
