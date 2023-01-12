@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/profileImgBack" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/profileLiChange"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -96,7 +96,7 @@
         android:paddingRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/profileLiChange">
 
         <LinearLayout
             android:id="@+id/profilellNotice"

@@ -71,11 +71,6 @@ class MainActivity : AppCompatActivity() {
             builder.show()
         }
 
-        // 알람보기
-        binding.mainImgAlert.setOnClickListener {
-
-        }
-
         binding.mainImgProfile.setOnClickListener {
             val intent = Intent(this@MainActivity, ProfileActivity::class.java)
             startActivity(intent)

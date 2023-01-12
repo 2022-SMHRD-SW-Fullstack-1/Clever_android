@@ -22,7 +22,7 @@ class MoreFragment : Fragment() {
     ): View? {
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
 
-        binding.moreFImgMember.setOnClickListener {
+        binding.moreFClMember.setOnClickListener {
             val intent = Intent(requireContext(), MoreMemberActivity::class.java)
             startActivity(intent)
         }

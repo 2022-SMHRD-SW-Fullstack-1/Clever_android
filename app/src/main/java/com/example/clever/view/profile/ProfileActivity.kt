@@ -7,6 +7,8 @@ import com.example.clever.R
 import com.example.clever.databinding.ActivityProfileBinding
 import com.example.clever.view.InquiryActivity
 import com.example.clever.view.LoginActivity
+import com.example.clever.view.NoticeActivity
+import com.example.clever.view.TermsOfUseActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -19,8 +21,18 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.profileImgChange.setOnClickListener {
+        binding.profileLiChange.setOnClickListener {
             val intent = Intent(this@ProfileActivity, ProfileChangeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.profilellNotice.setOnClickListener {
+            val intent = Intent(this@ProfileActivity, NoticeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.profilellUse.setOnClickListener {
+            val intent = Intent(this@ProfileActivity, TermsOfUseActivity::class.java)
             startActivity(intent)
         }
 

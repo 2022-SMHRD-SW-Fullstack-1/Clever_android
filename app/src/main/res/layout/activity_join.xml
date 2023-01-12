@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/joinCl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.JoinActivity">
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="클레버"
+        android:text="회원가입"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -58,26 +59,10 @@
         android:elevation="10dp"
         android:ems="10"
         android:hint="이메일"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/joinEtCode"
-        app:layout_constraintEnd_toEndOf="@+id/joinBtnJoin"
-        app:layout_constraintStart_toStartOf="@+id/joinBtnJoin" />
-
-    <EditText
-        android:id="@+id/joinEtCode"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/background_radius"
-        android:elevation="10dp"
-        android:ems="10"
-        android:hint="인증번호입력"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/joinBtnJoin"
-        app:layout_constraintEnd_toStartOf="@+id/joinBtnCode"
+        app:layout_constraintEnd_toEndOf="@+id/joinBtnJoin"
         app:layout_constraintStart_toStartOf="@+id/joinBtnJoin" />
 
     <EditText
@@ -86,11 +71,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_radius"
+        android:elevation="10dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
         android:padding="8dp"
-        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joinEtPwRe"
         app:layout_constraintEnd_toEndOf="@+id/joinEtPwRe"
         app:layout_constraintStart_toStartOf="@+id/joinEtPwRe" />
@@ -101,11 +86,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_radius"
+        android:elevation="10dp"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
         android:padding="8dp"
-        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joinEtPw"
         app:layout_constraintEnd_toEndOf="@+id/joinEtPhone"
         app:layout_constraintStart_toStartOf="@+id/joinEtPhone" />
@@ -116,26 +101,15 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_radius"
+        android:elevation="10dp"
         android:ems="10"
         android:hint="휴대폰번호"
         android:inputType="number"
         android:padding="8dp"
-        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joinEtName"
         app:layout_constraintEnd_toEndOf="@+id/joinEtPw"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/joinEtPw" />
-
-    <Button
-        android:id="@+id/joinBtnCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="인증번호받기"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/joinEtCode"
-        app:layout_constraintEnd_toEndOf="@+id/joinBtnJoin"
-        app:layout_constraintTop_toTopOf="@+id/joinEtCode" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/joinClGoLogin"

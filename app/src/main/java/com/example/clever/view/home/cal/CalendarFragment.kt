@@ -30,11 +30,13 @@ class CalendarFragment : Fragment() {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
         val current = LocalDate.now()
-        val formatter = current.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))
+        val formatterY = current.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))
+        val formatterD = current.format(DateTimeFormatter.ofPattern("yyyy.MM.DD"))
 
         // 초기화시 오늘 날짜 선택, 연월 숨기기
         binding.calendarCv.selectedDate = CalendarDay.today()
-        binding.calendarTvYear.text = formatter
+        binding.calendarTvYear.text = formatterY
+        binding.calendarTvDate.text = formatterD
         binding.calendarCv.topbarVisible = false
 
         // 달력 요일별 색, 선택시 색
@@ -77,9 +79,9 @@ class CalendarFragment : Fragment() {
             if(month.toInt() < 10) month = "0$month"
             if(day.toInt() < 10) day = "0$day"
 
-            var selectMsg = "${year}년 ${month}월 ${day}일"
+            var selectDate = "${year}.${month}.${day}"
+            binding.calendarTvDate.text = selectDate
 
-            Toast.makeText(context, selectMsg, Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

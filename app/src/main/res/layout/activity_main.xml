@@ -33,23 +33,13 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <ImageView
-        android:id="@+id/mainImgAlert"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainTvCount"
-        app:layout_constraintEnd_toStartOf="@+id/mainImgProfile"
-        app:layout_constraintTop_toTopOf="@+id/mainTvCount"
-        app:srcCompat="@drawable/notifications" />
-
-    <ImageView
         android:id="@+id/mainImgProfile"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainImgAlert"
+        app:layout_constraintBottom_toBottomOf="@+id/mainTvCount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mainImgAlert"
+        app:layout_constraintTop_toTopOf="@+id/mainTvCount"
         app:srcCompat="@drawable/profile" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -81,9 +71,9 @@
         android:id="@+id/mainTvGoHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="홈이동"
-        app:layout_constraintBottom_toBottomOf="@+id/mainBtnJoinGroup"
-        app:layout_constraintStart_toStartOf="@+id/mainRv"
-        app:layout_constraintTop_toTopOf="@+id/mainBtnJoinGroup" />
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mainRv"
+        app:layout_constraintEnd_toEndOf="@+id/mainRv"
+        app:layout_constraintStart_toStartOf="@+id/mainRv" />
 </androidx.constraintlayout.widget.ConstraintLayout>

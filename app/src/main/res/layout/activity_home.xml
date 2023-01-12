@@ -30,18 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingLeft="48dp"
             android:text="그룹이름"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/homeImgAlert"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/notifications" />
 
         <ImageView
             android:id="@+id/homeImgProfile"

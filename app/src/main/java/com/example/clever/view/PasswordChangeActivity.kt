@@ -8,33 +8,36 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.clever.R
-import com.example.clever.databinding.ActivityPasswordBinding
+import com.example.clever.databinding.ActivityPasswordChangeBinding
 
-class PasswordActivity : AppCompatActivity() {
+class PasswordChangeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPasswordBinding
+    private lateinit var binding: ActivityPasswordChangeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_password)
+        setContentView(R.layout.activity_password_change)
 
-        binding = ActivityPasswordBinding.inflate(layoutInflater)
+        binding = ActivityPasswordChangeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.pwCl.setOnTouchListener(object : View.OnTouchListener {
+        binding.pwChCl.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
                 hideKeyboard()
                 return false
             }
         })
 
-        binding.pwBtnPwChange.setOnClickListener {
-            val intent = Intent(this@PasswordActivity, PasswordChangeActivity::class.java)
+        binding.pwChBtnGoLogin.setOnClickListener {
+            val intent = Intent(this@PasswordChangeActivity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
         binding.pwClGoLogin.setOnClickListener {
-            finish()
+            val intent = Intent(this@PasswordChangeActivity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 
