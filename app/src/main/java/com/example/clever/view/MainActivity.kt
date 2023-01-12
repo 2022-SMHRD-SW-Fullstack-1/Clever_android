@@ -2,6 +2,7 @@ package com.example.clever.view
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -11,10 +12,13 @@ import com.example.clever.R
 import com.example.clever.adapter.MainAdapter
 import com.example.clever.databinding.ActivityMainBinding
 import com.example.clever.model.GroupVO
+import com.example.clever.view.home.HomeActivity
+import com.example.clever.view.profile.ProfileActivity
 
-private lateinit var binding: ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     // Item
     val groupList = ArrayList<GroupVO>()
@@ -65,6 +69,21 @@ class MainActivity : AppCompatActivity() {
                         null
                     }).create()
             builder.show()
+        }
+
+        // 알람보기
+        binding.mainImgAlert.setOnClickListener {
+
+        }
+
+        binding.mainImgProfile.setOnClickListener {
+            val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.mainTvGoHome.setOnClickListener {
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 

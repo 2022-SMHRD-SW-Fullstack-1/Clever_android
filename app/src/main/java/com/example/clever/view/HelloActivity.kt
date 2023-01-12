@@ -11,9 +11,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private lateinit var binding: ActivityHelloBinding
 
 class HelloActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityHelloBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)

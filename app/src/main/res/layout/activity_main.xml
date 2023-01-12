@@ -76,4 +76,14 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/mainTvGoHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="홈이동"
+        app:layout_constraintBottom_toBottomOf="@+id/mainBtnJoinGroup"
+        app:layout_constraintStart_toStartOf="@+id/mainRv"
+        app:layout_constraintTop_toTopOf="@+id/mainBtnJoinGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,42 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity">
 
-    <ImageView
-        android:id="@+id/loginImgGoPw"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/loginTvGoPw"
-        app:layout_constraintStart_toEndOf="@+id/loginTvGoPw"
-        app:layout_constraintTop_toTopOf="@+id/loginTvGoPw"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
-        app:tint="@color/gray" />
-
-    <TextView
-        android:id="@+id/loginTvGoPw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="26dp"
-        android:drawableTint="@color/gray"
-        android:text="비밀번호를 잊으셨나요 ?"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/loginTvJoin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/loginBtnLogin"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_main"
+        android:elevation="10dp"
         android:text="로그인"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginTvGoPw"
+        app:layout_constraintBottom_toTopOf="@+id/loginClGoPw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,7 +67,7 @@
         android:id="@+id/loginTvJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="회원가입"
         android:textColor="@color/mainColor"
         android:textSize="16sp"
@@ -100,4 +75,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loginClGoPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginTvJoin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/loginTvGoPw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:drawableTint="@color/gray"
+            android:text="비밀번호를 잊으셨나요 ?"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/loginImgGoPw"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/loginTvGoPw"
+            app:layout_constraintStart_toEndOf="@+id/loginTvGoPw"
+            app:layout_constraintTop_toTopOf="@+id/loginTvGoPw"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:tint="@color/gray" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
