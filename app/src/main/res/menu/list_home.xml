@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/tabHome1"
-        android:icon="@drawable/todolist"
+        android:icon="@drawable/todo_check"
         android:title="할 일 체크" />
     <item
         android:id="@+id/tabHome2"
