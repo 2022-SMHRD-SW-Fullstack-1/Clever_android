@@ -26,7 +26,7 @@ class HelloActivity : AppCompatActivity() {
         hello()
     }
 
-    fun hello(){
+    private fun hello(){
         RetrofitClient.api.hello().enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 binding.helloTv.text = response.body()?.string()

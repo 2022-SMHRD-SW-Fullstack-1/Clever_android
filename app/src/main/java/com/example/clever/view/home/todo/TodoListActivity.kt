@@ -6,10 +6,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.viewpager2.widget.ViewPager2
 import com.example.clever.R
+import com.example.clever.adapter.TodoPageAdapter
 import com.example.clever.databinding.ActivityTodoListBinding
 import com.example.clever.view.home.cal.*
 import com.example.clever.view.profile.ProfileActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
@@ -27,6 +30,21 @@ class TodoListActivity : AppCompatActivity() {
 
         binding = ActivityTodoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 슬라이드 viewPager2 사용
+        val pagerAdapter = TodoPageAdapter(this@TodoListActivity)
+        pagerAdapter.addFragment(TodoTab1Fragment())
+        pagerAdapter.addFragment(TodoTab2Fragment())
+        binding.todoListVp.adapter = pagerAdapter
+
+        // viewPager 와 TabLayout 연결
+        TabLayoutMediator(binding.todoListTl, binding.todoListVp) { tab, position ->
+            if (position == 0) {
+                tab.text = "미완료"
+            } else {
+                tab.text = "완료"
+            }
+        }.attach()
 
         binding.todoListImgBack.setOnClickListener {
             finish()
@@ -56,9 +74,9 @@ class TodoListActivity : AppCompatActivity() {
         binding.todoCalendar.setTitleFormatter { day -> "${day!!.year}년 ${day.month + 1}월" }
         binding.todoCalendar.setOnMonthChangedListener { widget, date ->
             var year = date.year.toString()
-            var month = (date.month+1).toString()
+            var month = (date.month + 1).toString()
 
-            if(month.toInt()<10) month = "0$month"
+            if (month.toInt() < 10) month = "0$month"
 
             binding.todoCalendarYear.text = "${year}년 ${month}월"
         }

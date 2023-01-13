@@ -3,27 +3,21 @@ package com.example.clever.retrofit
 import com.example.clever.model.Member
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetrofitInterface {
 
     @GET("android/hello")
     fun hello(): Call<ResponseBody>
 
-    @FormUrlEncoded
-    @POST("join")
-    fun joinMember(
-        @Field("name") name: String,
-        @Field("phone") phone: String,
-        @Field("password") password: String
-    ): Call<Member>
+    @POST("android/join")
+    fun join(
+        @Body join_info: Member
+    ): Call<ResponseBody>
 
-    @POST("login")
+    @POST("android/login")
     fun login(
-
+        @Body login_info: Member
     ): Call<ResponseBody>
 
     @GET("getGroup")
