@@ -1,5 +1,6 @@
 package com.example.clever.retrofit
 
+import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -20,9 +21,9 @@ interface RetrofitInterface {
         @Body login_info: Member
     ): Call<ResponseBody>
 
-    @GET("getGroup")
+    @POST("android/getGroup")
     fun getGroup(
-
-    ): Call<ResponseBody>
+        @Body user_info: Member
+    ): Call<List<GroupVO>>
 
 }

@@ -50,7 +50,7 @@ class JoinActivity : AppCompatActivity() {
         }
     }
 
-    fun hideKeyboard() {
+    private fun hideKeyboard() {
         if (this.currentFocus != null) {
             val inputManager: InputMethodManager =
                 this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

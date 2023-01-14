@@ -7,8 +7,6 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.clever.R
@@ -20,11 +18,17 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.properties.Delegates
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId:String
     lateinit var autoSp: SharedPreferences
+    private lateinit var autoLoginPhone: String
+    private lateinit var autoLoginPw: String
+    private var autoLoginCheckBox by Delegates.notNull<Boolean>()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +38,17 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        autoSp = getSharedPreferences("autoLoginInfo", Context.MODE_PRIVATE)
+        // 로그인한 유저 정보 저장
+        loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
 
+        // 자동로그인 정보 저장
+        autoSp = getSharedPreferences("autoLoginInfo", Context.MODE_PRIVATE)
+        autoLoginPhone = autoSp.getString("loginPhone", "").toString()
+        autoLoginPw = autoSp.getString("loginPw", "").toString()
+        autoLoginCheckBox = autoSp.getBoolean("loginCb", false)
+
+        // 화면 클릭시 키보드 내리기
         binding.loginCl.setOnTouchListener { _, _ ->
             hideKeyboard()
             false
@@ -56,7 +69,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun hideKeyboard() {
+    // 화면 클릭시 키보드 내리기
+    private fun hideKeyboard() {
         if (this.currentFocus != null) {
             val inputManager: InputMethodManager =
                 this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -78,7 +92,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             } else {
                 val loginInfo = Member(phone, pw)
-
                 RetrofitClient.api.login(loginInfo).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
@@ -86,16 +99,25 @@ class LoginActivity : AppCompatActivity() {
                     ) {
                         val res = response.body()?.string()
                         if (res != "") {
+                            val editorAuto = autoSp.edit()
+                            if (binding.loginCbAutoLogin.isChecked) {
+                                editorAuto.putString("loginPhone", phone)
+                                editorAuto.putString("loginPw", pw)
+                                editorAuto.putBoolean("loginCb", true)
+                                editorAuto.commit()
+                            }
+                            val editorMem = loginSp.edit()
                             val memberInfo = Gson().fromJson(res, Member::class.java)
-                            Log.d("test login id", memberInfo.mem_id)
-                            Log.d("test login name", memberInfo.mem_name.toString())
+                            editorMem.putString("mem_id", memberInfo.mem_id).commit()
+
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
-//                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                startActivity(intent)
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        t.localizedMessage?.let { Log.d("hello", it) }
+                        t.localizedMessage?.let { Log.d("login", it) }
                     }
                 })
             }

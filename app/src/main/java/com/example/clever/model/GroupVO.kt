@@ -1,9 +1,23 @@
 package com.example.clever.model
 
+import com.google.gson.annotations.SerializedName
+
 data class GroupVO(
-    val groupSeq: Int? = null,
-    val memberSeq: Int? = null,
-    val groupName: String? = null,
-    val groupDate: String? = null,
-    val groupCode: String? = null
+    @SerializedName("group_seq")
+    val group_seq: Int,
+
+    @SerializedName("group_name")
+    val group_name: String,
+
+    @SerializedName("group_dt")
+    val group_dt: String,
+
+    @SerializedName("group_serial")
+    val group_serial: String,
+
+    @SerializedName("mem_id")
+    val mem_id: String,
+
+    @SerializedName("join_dt")
+    val join_dt: String,
 )

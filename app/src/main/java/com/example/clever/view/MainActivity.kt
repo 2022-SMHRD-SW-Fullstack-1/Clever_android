@@ -1,10 +1,13 @@
 package com.example.clever.view
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,16 +15,26 @@ import com.example.clever.R
 import com.example.clever.adapter.MainAdapter
 import com.example.clever.databinding.ActivityMainBinding
 import com.example.clever.model.GroupVO
+import com.example.clever.model.Member
+import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.home.HomeActivity
 import com.example.clever.view.profile.ProfileActivity
+import com.google.gson.Gson
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId: String
 
     // Item
-    val groupList = ArrayList<GroupVO>()
+    private val groupList = ArrayList<GroupVO>()
+
     // Adapter
     lateinit var adapter: MainAdapter
 
@@ -42,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         // template_main_rv
 
         // Item
-//        getGroup()
+        getGroup()
 
         // Adapter
         adapter = MainAdapter(
@@ -83,17 +96,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 참여중이 group 가져오기
-//    private fun getGroup(){
-//        RetrofitClient.api.getGroup().enqueue(object :Callback<ResponseBody>{
-//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
+    private fun getGroup() {
+        loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
+
+        val userInfo = Member(memId)
+
+        RetrofitClient.api.getGroup(userInfo).enqueue(object : Callback<List<GroupVO>> {
+            override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
+                val res = response.body()
+                if (res?.size == 0){
+                    Log.d("group", "0")
+                }else{
+                    Log.d("group", "0아님")
+                }
+            }
+
+            override fun onFailure(call: Call<List<GroupVO>>, t: Throwable) {
+                t.localizedMessage?.let { Log.d("group", it) }
+            }
+        })
+    }
 
     // 그룹 참여하기
 }

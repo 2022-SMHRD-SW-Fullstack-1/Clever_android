@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.clever.R
-import com.example.clever.databinding.FragmentCalendarBinding
 import com.example.clever.databinding.FragmentMoreBinding
-import com.example.clever.view.InquiryActivity
+import com.example.clever.view.notice.InquiryActivity
 
 class MoreFragment : Fragment() {
 

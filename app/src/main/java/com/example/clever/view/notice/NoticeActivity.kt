@@ -1,12 +1,12 @@
-package com.example.clever.view
+package com.example.clever.view.notice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.clever.R
 
-class TermsOfUseActivity : AppCompatActivity() {
+class NoticeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_terms_of_use)
+        setContentView(R.layout.activity_notice)
     }
 }

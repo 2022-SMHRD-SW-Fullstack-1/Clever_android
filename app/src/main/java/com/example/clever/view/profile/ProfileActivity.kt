@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.clever.R
 import com.example.clever.databinding.ActivityProfileBinding
-import com.example.clever.view.InquiryActivity
+import com.example.clever.view.notice.InquiryActivity
 import com.example.clever.view.LoginActivity
-import com.example.clever.view.NoticeActivity
-import com.example.clever.view.TermsOfUseActivity
+import com.example.clever.view.notice.NoticeActivity
+import com.example.clever.view.notice.TermsOfUseActivity
 
 class ProfileActivity : AppCompatActivity() {
 
