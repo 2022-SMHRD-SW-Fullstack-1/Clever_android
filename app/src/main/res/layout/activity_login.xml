@@ -25,7 +25,7 @@
         android:id="@+id/loginEtPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/background_radius"
         android:elevation="10dp"
         android:ems="10"
@@ -34,6 +34,7 @@
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/loginEtPw"
         app:layout_constraintEnd_toEndOf="@+id/loginEtPw"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/loginEtPw" />
 
     <EditText
@@ -47,7 +48,7 @@
         android:hint="비밀번호"
         android:inputType="textPassword"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtnLogin"
+        app:layout_constraintBottom_toTopOf="@+id/loginCbAutoLogin"
         app:layout_constraintEnd_toEndOf="@+id/loginBtnLogin"
         app:layout_constraintStart_toStartOf="@+id/loginBtnLogin" />
 
@@ -111,4 +112,13 @@
             app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
             app:tint="@color/gray" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <CheckBox
+        android:id="@+id/loginCbAutoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="자동 로그인"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtnLogin"
+        app:layout_constraintStart_toStartOf="@+id/loginBtnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

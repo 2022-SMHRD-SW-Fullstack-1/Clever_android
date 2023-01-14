@@ -42,11 +42,13 @@ class PasswordChangeActivity : AppCompatActivity() {
     }
 
     fun hideKeyboard() {
-        val inputManager: InputMethodManager =
-            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(
-            this.currentFocus!!.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
+        if (this.currentFocus != null) {
+            val inputManager: InputMethodManager =
+                this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(
+                this.currentFocus!!.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
+        }
     }
 }

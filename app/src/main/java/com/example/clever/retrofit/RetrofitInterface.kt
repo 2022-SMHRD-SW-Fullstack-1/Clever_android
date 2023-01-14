@@ -10,12 +10,12 @@ interface RetrofitInterface {
     @GET("android/hello")
     fun hello(): Call<ResponseBody>
 
-    @POST("android/join")
+    @POST("join")
     fun join(
         @Body join_info: Member
     ): Call<ResponseBody>
 
-    @POST("android/login")
+    @POST("login")
     fun login(
         @Body login_info: Member
     ): Call<ResponseBody>
