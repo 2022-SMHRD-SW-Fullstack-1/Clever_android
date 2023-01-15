@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     lateinit var loginSp: SharedPreferences
     private lateinit var memId:String
+    private lateinit var memName:String
     lateinit var autoSp: SharedPreferences
     private lateinit var autoLoginPhone: String
     private lateinit var autoLoginPw: String
@@ -41,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
         // 로그인한 유저 정보 저장
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
+        memName = loginSp.getString("mem_name","").toString()
 
         // 자동로그인 정보 저장
         autoSp = getSharedPreferences("autoLoginInfo", Context.MODE_PRIVATE)
@@ -104,11 +106,13 @@ class LoginActivity : AppCompatActivity() {
                                 editorAuto.putString("loginPhone", phone)
                                 editorAuto.putString("loginPw", pw)
                                 editorAuto.putBoolean("loginCb", true)
-                                editorAuto.commit()
+                                editorAuto.apply()
                             }
                             val editorMem = loginSp.edit()
                             val memberInfo = Gson().fromJson(res, Member::class.java)
-                            editorMem.putString("mem_id", memberInfo.mem_id).commit()
+                            editorMem.putString("mem_id", memberInfo.mem_id)
+                            editorMem.putString("mem_name", memberInfo.mem_name)
+                            editorMem.apply()
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)

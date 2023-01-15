@@ -29,8 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profileImgBack" />
 
-    <LinearLayout
-        android:id="@+id/profileLiChange"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileClChange"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,52 +38,54 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/background_radius"
         android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <TextView
+            android:id="@+id/profileTvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="이름"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/profileImgChange"
+            app:layout_constraintStart_toEndOf="@+id/profileImgPic"
+            app:layout_constraintTop_toTopOf="@+id/profileImgPic" />
+
+        <TextView
+            android:id="@+id/profileTvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="전화번호"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/profileTvName"
+            app:layout_constraintStart_toStartOf="@+id/profileTvName"
+            app:layout_constraintTop_toBottomOf="@+id/profileTvName" />
+
+        <ImageView
+            android:id="@+id/profileImgChange"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profileImgPic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profileImgPic"
+            app:srcCompat="@drawable/arrow_right" />
 
         <ImageView
             android:id="@+id/profileImgPic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/profileTvName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="이름"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/profileTvPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="전화번호"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/profileImgChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:srcCompat="@drawable/arrow_right" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -96,7 +98,7 @@
         android:paddingRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileLiChange">
+        app:layout_constraintTop_toBottomOf="@+id/profileClChange">
 
         <LinearLayout
             android:id="@+id/profilellNotice"
@@ -263,4 +265,19 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/profileBtnJoinGroup"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_main"
+        android:drawableLeft="@drawable/plus"
+        android:drawableTint="@color/white"
+        android:text="그룹 참여하기"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

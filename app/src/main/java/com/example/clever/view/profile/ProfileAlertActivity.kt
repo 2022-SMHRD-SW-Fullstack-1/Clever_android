@@ -16,6 +16,10 @@ class ProfileAlertActivity : AppCompatActivity() {
         binding = ActivityProfileAlertBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.profileAlertImgBack.setOnClickListener {
+            finish()
+        }
+
         binding.profileAlertSwitch.setOnCheckedChangeListener { compoundButton, b ->
             if(b){
                 binding.profileAlertTv.text = "ON"

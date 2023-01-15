@@ -99,7 +99,7 @@ class JoinActivity : AppCompatActivity() {
                                 )
                                     .show()
                             } else {
-                                val joinInfo = Member(phone, name, pw, email)
+                                val joinInfo = Member(phone, pw, name, email)
 
                                 RetrofitClient.api.join(joinInfo)
                                     .enqueue(object : Callback<ResponseBody> {

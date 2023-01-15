@@ -9,18 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clever.R
 import com.example.clever.adapter.MainAdapter
 import com.example.clever.databinding.ActivityMainBinding
+import com.example.clever.decorator.main.MainRvDecorator
 import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.home.HomeActivity
 import com.example.clever.view.profile.ProfileActivity
-import com.google.gson.Gson
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         // Adapter Container 연결
         binding.mainRv.adapter = adapter
         binding.mainRv.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.mainRv.addItemDecoration(MainRvDecorator(16))
 
         // Event 처리
         binding.mainBtnJoinGroup.setOnClickListener {
@@ -100,16 +99,16 @@ class MainActivity : AppCompatActivity() {
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
 
-        val userInfo = Member(memId)
-
-        RetrofitClient.api.getGroup(userInfo).enqueue(object : Callback<List<GroupVO>> {
+        RetrofitClient.api.getGroup(Member(memId)).enqueue(object : Callback<List<GroupVO>> {
             override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
                 val res = response.body()
-                if (res?.size == 0){
-                    Log.d("group", "0")
-                }else{
-                    Log.d("group", "0아님")
+                groupList.clear()
+                for (i in 0 until res!!.size) {
+                    groupList.add(res[i])
                 }
+                binding.mainTvCount.text = groupList.size.toString()
+
+                adapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<List<GroupVO>>, t: Throwable) {

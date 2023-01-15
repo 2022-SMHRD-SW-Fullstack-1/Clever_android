@@ -47,6 +47,7 @@
             android:id="@+id/imageView7"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:tint="@color/mainColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/stars" />
@@ -89,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:text="이름"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -100,7 +100,6 @@
             android:id="@+id/moreMemTvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="가입날짜"
             app:layout_constraintBottom_toBottomOf="@+id/moreMemImgPic"
             app:layout_constraintStart_toStartOf="@+id/moreMemTvName"
             app:layout_constraintTop_toBottomOf="@+id/moreMemTvName" />
@@ -125,9 +124,10 @@
             android:id="@+id/imageView6"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:tint="@color/mainColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile" />
+            app:srcCompat="@drawable/group" />
 
         <TextView
             android:id="@+id/textView16"
@@ -147,7 +147,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="2"
             android:textColor="@color/mainColor"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -6,10 +6,11 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import androidx.viewpager2.widget.ViewPager2
 import com.example.clever.R
 import com.example.clever.adapter.TodoPageAdapter
 import com.example.clever.databinding.ActivityTodoListBinding
+import com.example.clever.decorator.*
+import com.example.clever.decorator.calendar.*
 import com.example.clever.view.home.cal.*
 import com.example.clever.view.profile.ProfileActivity
 import com.google.android.material.tabs.TabLayoutMediator

@@ -21,9 +21,33 @@ interface RetrofitInterface {
         @Body login_info: Member
     ): Call<ResponseBody>
 
+    @POST("android/userInfo")
+    fun userInfo(
+        @Body user_info: Member
+    ): Call<Member>
+
     @POST("android/getGroup")
     fun getGroup(
         @Body user_info: Member
     ): Call<List<GroupVO>>
 
+    @POST("android/groupInfo")
+    fun groupInfo(
+        @Body group_info: GroupVO
+    ): Call<GroupVO>
+
+    @POST("android/groupMemCount")
+    fun groupMemCount(
+        @Body group_info : GroupVO
+    ): Call<List<GroupVO>>
+
+    @POST("android/joinDate")
+    fun joinDate(
+        @Body group_info: GroupVO
+    ): Call<GroupVO>
+
+    @POST("android/groupMem")
+    fun groupMem(
+        @Body group_info : GroupVO
+    ): Call<List<GroupVO>>
 }

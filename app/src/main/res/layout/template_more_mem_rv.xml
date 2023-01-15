@@ -10,7 +10,6 @@
         android:id="@+id/moreMemRvPic"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -39,11 +38,18 @@
 
     <ImageView
         android:id="@+id/moreMemRvOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:tint="#ff0000"
         app:layout_constraintBottom_toBottomOf="@+id/moreMemRvPic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/moreMemRvPic"
         app:srcCompat="@drawable/person_off" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="-159dp"
+        tools:layout_editor_absoluteY="24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

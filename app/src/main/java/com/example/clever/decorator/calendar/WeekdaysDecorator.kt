@@ -1,4 +1,4 @@
-package com.example.clever.view.home.cal
+package com.example.clever.decorator.calendar
 
 import android.graphics.Color
 import android.text.style.ForegroundColorSpan
@@ -7,16 +7,21 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import java.util.*
 
-class SundayDecorator:DayViewDecorator {
+class WeekdaysDecorator : DayViewDecorator {
+
     private val calendar = Calendar.getInstance()
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         day?.copyTo(calendar)
         val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
-        return weekDay == Calendar.SUNDAY
+        return if (weekDay != Calendar.SUNDAY) {
+            weekDay != Calendar.SATURDAY
+        }else{
+            false
+        }
     }
 
     override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(object : ForegroundColorSpan(Color.parseColor("#ff0000")){})
+        view?.addSpan(object : ForegroundColorSpan(Color.parseColor("#000000")) {})
     }
 }
