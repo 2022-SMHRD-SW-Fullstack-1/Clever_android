@@ -1,6 +1,5 @@
 package com.example.clever.view.home.more
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -117,7 +116,7 @@ class MoreFragment : Fragment() {
     private fun groupMemCount() {
         val groupInfo = GroupVO(group_seq.toInt())
 
-        RetrofitClient.api.groupMemCount(groupInfo).enqueue(object : Callback<List<GroupVO>> {
+        RetrofitClient.api.groupMem(groupInfo).enqueue(object : Callback<List<GroupVO>> {
             override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
                 val res = response.body()
                 binding.moreFtvCount.text = res!!.size.toString()

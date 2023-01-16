@@ -102,7 +102,7 @@ class MoreMemberActivity : AppCompatActivity() {
         RetrofitClient.api.groupMem(groupInfo).enqueue(object : Callback<List<GroupVO>> {
             override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
                 val res = response.body()
-                binding.moreMemTvCount.text = res!!.size.toString()
+                binding.moreMemTvCount.text = ((res!!.size)-1).toString()
 
                 for (i in 0 until res!!.size) {
                     if (mem_id != res[i].mem_id) memberList.add(res[i])

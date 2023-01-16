@@ -29,7 +29,6 @@
             android:id="@+id/todoListTvGroupName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="카테고리명"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -140,11 +139,17 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/todoListTl"
-            android:layout_width="409dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11"
+            app:tabIndicatorColor="@color/mainColor"
+            app:tabIndicatorHeight="2dp"
+            app:tabSelectedTextColor="@color/mainColor"
+            app:tabTextAppearance="@style/tabLayout_text"
+            app:tabTextColor="@color/gray">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -164,7 +169,6 @@
         android:id="@+id/todoListVp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

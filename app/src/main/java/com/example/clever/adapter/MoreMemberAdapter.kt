@@ -42,6 +42,8 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
         holder.moreMemRvDate.text = "${year}.${month}.${day} 합류"
 
         holder.moreMemRvName.text = memberList[position].mem_name
+
+
     }
 
     override fun getItemCount(): Int {

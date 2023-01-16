@@ -38,6 +38,8 @@ class HomeActivity : AppCompatActivity() {
         val groupSeq = intent.getStringExtra("group_seq")
         val groupName = intent.getStringExtra("group_name")
 
+        Log.d("home ac", groupSeq.toString())
+
         groupSp = getSharedPreferences("groupInfo", Context.MODE_PRIVATE)
         group_seq = groupSp.getString("group_seq", "").toString()
         group_name = groupSp.getString("group_name", "").toString()

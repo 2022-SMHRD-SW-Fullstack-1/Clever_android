@@ -67,16 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/mainTvGoHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="홈이동"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainRv"
-        app:layout_constraintEnd_toEndOf="@+id/mainRv"
-        app:layout_constraintStart_toStartOf="@+id/mainRv" />
-
-    <TextView
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

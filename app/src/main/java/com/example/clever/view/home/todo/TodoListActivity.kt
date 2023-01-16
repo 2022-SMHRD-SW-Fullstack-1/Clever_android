@@ -24,13 +24,21 @@ class TodoListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTodoListBinding
 
+    lateinit var cate_seq: String
+    lateinit var cate_name: String
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo_list)
 
+        cate_seq = intent.getStringExtra("cate_seq").toString()
+        cate_name = intent.getStringExtra("cate_name").toString()
+
         binding = ActivityTodoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.todoListTvGroupName.text = cate_name
 
         // 슬라이드 viewPager2 사용
         val pagerAdapter = TodoPageAdapter(this@TodoListActivity)

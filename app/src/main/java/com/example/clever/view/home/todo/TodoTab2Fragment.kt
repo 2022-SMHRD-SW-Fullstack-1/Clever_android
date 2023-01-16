@@ -19,11 +19,6 @@ class TodoTab2Fragment : Fragment() {
     ): View? {
         _binding = FragmentTodoTab2Binding.inflate(inflater, container, false)
 
-        binding.tab2Move.setOnClickListener {
-            val intent = Intent(requireContext(), TodoCompleteActivity::class.java)
-            startActivity(intent)
-        }
-
         return binding.root
     }
 

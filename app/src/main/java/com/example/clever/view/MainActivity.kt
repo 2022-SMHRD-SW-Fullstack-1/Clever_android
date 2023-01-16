@@ -88,10 +88,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.mainTvGoHome.setOnClickListener {
-            val intent = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     // 참여중이 group 가져오기

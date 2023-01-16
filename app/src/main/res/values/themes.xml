@@ -14,4 +14,9 @@
         <item name="android:statusBarColor">@color/mainColor</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="tabLayout_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

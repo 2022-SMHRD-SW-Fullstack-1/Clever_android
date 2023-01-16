@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noticeClGoDetail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="@drawable/background_radius"
-    android:elevation="10dp"
+    android:background="@color/white"
     android:padding="16dp">
 
     <View
@@ -23,7 +23,6 @@
         android:id="@+id/noticeFolderRvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="제목"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="내용"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/noticeFolderRvTitle"
         app:layout_constraintTop_toBottomOf="@+id/noticeFolderRvTitle" />
@@ -44,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="작성자"
         app:layout_constraintStart_toStartOf="@+id/noticeFolderRvContent"
         app:layout_constraintTop_toBottomOf="@+id/noticeFolderRvContent" />
 
@@ -64,8 +61,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="2023년 1월 1일 작성"
         app:layout_constraintBottom_toBottomOf="@+id/textView35"
         app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toTopOf="@+id/textView35" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

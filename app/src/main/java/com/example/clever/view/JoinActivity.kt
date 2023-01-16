@@ -45,7 +45,7 @@ class JoinActivity : AppCompatActivity() {
         }
 
         binding.joinBtnJoin.setOnClickListener {
-            join()
+            joinMember()
 
         }
     }
@@ -61,7 +61,7 @@ class JoinActivity : AppCompatActivity() {
         }
     }
 
-    private fun join() {
+    private fun joinMember() {
         val phone = binding.joinEtPhone.text.toString().trim()
         val name = binding.joinEtName.text.toString().trim()
         val pw = binding.joinEtPw.text.toString().trim()
@@ -101,7 +101,7 @@ class JoinActivity : AppCompatActivity() {
                             } else {
                                 val joinInfo = Member(phone, pw, name, email)
 
-                                RetrofitClient.api.join(joinInfo)
+                                RetrofitClient.api.joinMember(joinInfo)
                                     .enqueue(object : Callback<ResponseBody> {
                                         override fun onResponse(
                                             call: Call<ResponseBody>,
