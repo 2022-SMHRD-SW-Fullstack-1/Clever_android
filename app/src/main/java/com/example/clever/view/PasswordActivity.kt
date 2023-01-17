@@ -5,11 +5,17 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.clever.R
 import com.example.clever.databinding.ActivityPasswordBinding
+import com.example.clever.model.Member
+import com.example.clever.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PasswordActivity : AppCompatActivity() {
 
@@ -30,9 +36,14 @@ class PasswordActivity : AppCompatActivity() {
             }
         })
 
+        binding.pwBtnPwChange.isEnabled = false
         binding.pwBtnPwChange.setOnClickListener {
             val intent = Intent(this@PasswordActivity, PasswordChangeActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.pwBtnCode.setOnClickListener {
+            getCode()
         }
 
         binding.pwClGoLogin.setOnClickListener {
@@ -49,5 +60,23 @@ class PasswordActivity : AppCompatActivity() {
                 InputMethodManager.HIDE_NOT_ALWAYS
             )
         }
+    }
+
+    private fun getCode(){
+        val id = binding.pwEtPhone.text.toString()
+        val email = binding.pwEtEmail.text.toString()
+        val code = binding.pwEtCode.text.toString()
+
+        val req = Member(id, null, email)
+        RetrofitClient.api.getCode(req).enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                val res = response.body()
+                Log.d("코드받기", res.toString())
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

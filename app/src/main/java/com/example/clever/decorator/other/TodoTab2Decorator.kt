@@ -1,10 +1,10 @@
-package com.example.clever.decorator.main
+package com.example.clever.decorator.other
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class MainRvDecorator(private val margin: Int): RecyclerView.ItemDecoration() {
+class TodoTab2Decorator(private val margin: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -14,10 +14,10 @@ class MainRvDecorator(private val margin: Int): RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 
-        with(outRect){
+        with(outRect) {
             top = margin
-            left = margin*2
-            right = margin*2
+            left = margin
+            right = margin
             bottom = margin
         }
     }

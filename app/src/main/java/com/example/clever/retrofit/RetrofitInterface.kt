@@ -1,9 +1,6 @@
 package com.example.clever.retrofit
 
-import com.example.clever.model.CategoryVO
-import com.example.clever.model.GroupVO
-import com.example.clever.model.Member
-import com.example.clever.model.NoticeVO
+import com.example.clever.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -65,4 +62,29 @@ interface RetrofitInterface {
     fun getNoticeDetail(
         @Body notice_info: NoticeVO
     ): Call<NoticeVO>
+
+    @POST("android/getToDoList")
+    fun getToDoList(
+        @Body todo_info: ToDoVo
+    ): Call<List<ToDoVo>>
+
+    @POST("android/getToDoComplete")
+    fun getToDoComplete(
+        @Body todo_info: ToDoCompleteVO
+    ): Call<List<ToDoCompleteVO>>
+
+    @POST("android/getToDo")
+    fun getToDo(
+        @Body todo_info: ToDoVo
+    ): Call<ToDoVo>
+
+    @POST("android/getToDoCmplList")
+    fun getToDoCmplList(
+        @Body cmpl_info: ToDoCompleteVO
+    ): Call<List<ToDoCompleteVO>>
+
+    @POST("android/getCode")
+    fun getCode(
+        @Body mem_info: Member
+    ): Call<String>
 }

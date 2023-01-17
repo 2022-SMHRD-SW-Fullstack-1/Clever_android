@@ -9,15 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.clever.R
 import com.example.clever.adapter.MainAdapter
 import com.example.clever.databinding.ActivityMainBinding
-import com.example.clever.decorator.main.MainRvDecorator
+import com.example.clever.decorator.other.MainRvDecorator
 import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
 import com.example.clever.retrofit.RetrofitClient
-import com.example.clever.view.home.HomeActivity
 import com.example.clever.view.profile.ProfileActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         // Adapter Container 연결
         binding.mainRv.adapter = adapter
-        binding.mainRv.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.mainRv.layoutManager = GridLayoutManager(this@MainActivity, 1)
         binding.mainRv.addItemDecoration(MainRvDecorator(16))
 
         // Event 처리

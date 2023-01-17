@@ -11,6 +11,7 @@ import com.example.clever.adapter.TodoPageAdapter
 import com.example.clever.databinding.ActivityTodoListBinding
 import com.example.clever.decorator.*
 import com.example.clever.decorator.calendar.*
+import com.example.clever.utils.Time
 import com.example.clever.view.home.cal.*
 import com.example.clever.view.profile.ProfileActivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -40,11 +41,17 @@ class TodoListActivity : AppCompatActivity() {
 
         binding.todoListTvGroupName.text = cate_name
 
+        var todoTab1Fragment = TodoTab1Fragment()
+        var todoTab2Fragment = TodoTab2Fragment()
+
         // 슬라이드 viewPager2 사용
         val pagerAdapter = TodoPageAdapter(this@TodoListActivity)
-        pagerAdapter.addFragment(TodoTab1Fragment())
-        pagerAdapter.addFragment(TodoTab2Fragment())
+        pagerAdapter.addFragment(todoTab1Fragment)
+        pagerAdapter.addFragment(todoTab2Fragment)
         binding.todoListVp.adapter = pagerAdapter
+
+        todoTab1Fragment.selectDate(Time.getTime())
+        todoTab2Fragment.selectDate(Time.getTime())
 
         // viewPager 와 TabLayout 연결
         TabLayoutMediator(binding.todoListTl, binding.todoListVp) { tab, position ->
@@ -105,6 +112,17 @@ class TodoListActivity : AppCompatActivity() {
 
         // 날짜 클릭 이벤트
         binding.todoCalendar.setOnDateChangedListener { widget, date, selected ->
+            var year = date.year.toString()
+            var month = (date.month+1).toString()
+            var day = date.day.toString()
+
+            if(month.toInt() < 10) month = "0$month"
+            if(day.toInt() < 10) day = "0$day"
+
+            var selectDate = "${year}-${month}-${day}"
+
+            todoTab1Fragment.selectDate(selectDate)
+            todoTab2Fragment.selectDate(selectDate)
 
         }
     }

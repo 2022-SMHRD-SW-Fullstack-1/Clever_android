@@ -3,6 +3,7 @@ package com.example.clever.view.home.cal
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class CalendarFragment : Fragment() {
 
@@ -41,23 +43,42 @@ class CalendarFragment : Fragment() {
         binding.calendarCv.topbarVisible = false
 
         // 달력 요일별 색, 선택시 색
-        binding.calendarCv.addDecorator(WeekdaysDecorator())
-        binding.calendarCv.addDecorator(SaturdayDecorator())
-        binding.calendarCv.addDecorator(SundayDecorator())
-        binding.calendarCv.addDecorator(CalendarDecorator())
-        binding.calendarCv.addDecorator(SelectDecorator(requireActivity()))
+        val weekdaysDecorator = WeekdaysDecorator()
+        val saturdayDecorator = SaturdayDecorator()
+        val sundayDecorator = SundayDecorator()
+        val calendarDecorator = CalendarDecorator()
+        val selectDecorator = SelectDecorator(requireActivity())
+
+        binding.calendarCv.addDecorators(
+            weekdaysDecorator,
+            saturdayDecorator,
+            sundayDecorator,
+            calendarDecorator,
+            selectDecorator
+        )
 
         // header, 요일 한글로 변경
         binding.calendarCv.setTitleFormatter { day -> "${day!!.year}년 ${day.month + 1}월" }
         binding.calendarCv.setOnMonthChangedListener { widget, date ->
             var year = date.year.toString()
-            var month = (date.month+1).toString()
+            var month = (date.month + 1).toString()
 
-            if(month.toInt()<10) month = "0$month"
+            if (month.toInt() < 10) month = "0$month"
 
             binding.calendarTvYear.text = "${year}년 ${month}월"
+
+            binding.calendarCv.removeDecorators()
+            binding.calendarCv.addDecorators(
+                weekdaysDecorator,
+                saturdayDecorator,
+                sundayDecorator,
+                calendarDecorator,
+                selectDecorator
+            )
+            binding.calendarCv.addDecorator(OtherMonthDecorator(month.toInt() - 1))
         }
         binding.calendarCv.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)));
+
 
         // 주간, 월간 변경
         binding.calendarTvWeek.setOnClickListener {
@@ -74,15 +95,24 @@ class CalendarFragment : Fragment() {
         // 날짜 클릭 이벤트
         binding.calendarCv.setOnDateChangedListener { widget, date, selected ->
             var year = date.year.toString()
-            var month = (date.month+1).toString()
+            var month = (date.month + 1).toString()
             var day = date.day.toString()
 
-            if(month.toInt() < 10) month = "0$month"
-            if(day.toInt() < 10) day = "0$day"
+            if (month.toInt() < 10) month = "0$month"
+            if (day.toInt() < 10) day = "0$day"
 
             var selectDate = "${year}.${month}.${day}"
             binding.calendarTvDate.text = selectDate
 
+            binding.calendarCv.removeDecorators()
+            binding.calendarCv.addDecorators(
+                weekdaysDecorator,
+                saturdayDecorator,
+                sundayDecorator,
+                calendarDecorator,
+                selectDecorator
+            )
+            binding.calendarCv.addDecorator(OtherMonthDecorator(month.toInt() - 1))
         }
 
         return binding.root

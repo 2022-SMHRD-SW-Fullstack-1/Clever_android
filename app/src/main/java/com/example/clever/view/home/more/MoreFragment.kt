@@ -22,7 +22,6 @@ class MoreFragment : Fragment() {
     private var _binding: FragmentMoreBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var groupSp: SharedPreferences
     lateinit var group_seq: String
     lateinit var group_name: String
 
@@ -36,9 +35,8 @@ class MoreFragment : Fragment() {
     ): View? {
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
 
-        groupSp = requireContext().getSharedPreferences("groupInfo", Context.MODE_PRIVATE)
-        group_seq = groupSp.getString("group_seq", "").toString()
-        group_name = groupSp.getString("group_name", "").toString()
+        group_seq = activity?.intent?.getStringExtra("group_seq").toString()
+        group_name = activity?.intent?.getStringExtra("group_name").toString()
 
         loginSp = requireContext().getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()

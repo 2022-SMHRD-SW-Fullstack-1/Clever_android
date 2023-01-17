@@ -1,4 +1,4 @@
-package com.example.clever.decorator.main
+package com.example.clever.decorator.other
 
 import android.graphics.Rect
 import android.view.View

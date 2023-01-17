@@ -66,15 +66,10 @@
         android:id="@+id/noticeCategoryImgMore"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/noticeCategoryCl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/noticeCategoryCl"
         app:srcCompat="@drawable/more_vert" />
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="800dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="-100dp"
-        tools:layout_editor_absoluteY="-6dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
