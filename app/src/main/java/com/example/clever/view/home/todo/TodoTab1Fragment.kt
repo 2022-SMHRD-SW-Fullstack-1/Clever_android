@@ -74,10 +74,10 @@ class TodoTab1Fragment : Fragment() {
     }
 
     private fun getTodolist() {
-        Log.d("tab 1", "getTodolist")
         val req = ToDoVo(cate_seq.toInt())
         RetrofitClient.api.getToDoList(req).enqueue(object : Callback<List<ToDoVo>> {
             override fun onResponse(call: Call<List<ToDoVo>>, response: Response<List<ToDoVo>>) {
+                todoList.clear()
                 val res = response.body()
                 for (i in 0 until res!!.size) {
                     todoList.add(res[i])
@@ -92,7 +92,6 @@ class TodoTab1Fragment : Fragment() {
     }
 
     private fun getCmpl() {
-        Log.d("tab 1", "getCmpl")
         val req = ToDoCompleteVO(cate_seq.toInt(), selectDate)
         RetrofitClient.api.getToDoComplete(req)
             .enqueue(object : Callback<List<ToDoCompleteVO>> {

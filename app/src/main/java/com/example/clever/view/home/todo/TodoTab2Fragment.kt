@@ -77,6 +77,7 @@ class TodoTab2Fragment : Fragment() {
                     call: Call<List<ToDoCompleteVO>>,
                     response: Response<List<ToDoCompleteVO>>
                 ) {
+                    cmplList.clear()
                     val res = response.body()
                     Log.d("tab2", res.toString())
                     for (i in 0 until res!!.size) {

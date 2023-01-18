@@ -86,5 +86,10 @@ interface RetrofitInterface {
     @POST("android/getCode")
     fun getCode(
         @Body mem_info: Member
-    ): Call<String>
+    ): Call<ResponseBody>
+
+    @POST("android/changePw")
+    fun changePw(
+        @Body mem_info: Member
+    ): Call<ResponseBody>
 }
