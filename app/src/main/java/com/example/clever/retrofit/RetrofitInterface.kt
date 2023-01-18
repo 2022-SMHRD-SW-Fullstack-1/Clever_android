@@ -92,4 +92,9 @@ interface RetrofitInterface {
     fun changePw(
         @Body mem_info: Member
     ): Call<ResponseBody>
+
+    @POST("android/groupOut")
+    fun groupOut(
+        @Body group_info: GroupVO
+    ): Call<ResponseBody>
 }

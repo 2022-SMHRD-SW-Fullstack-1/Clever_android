@@ -1,19 +1,34 @@
 package com.example.clever.adapter
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
 import com.example.clever.model.GroupVO
+import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.home.HomeActivity
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO>): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO>) :
+    RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId: String
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val imgMore: ImageView
         val tvGroupName: TextView
@@ -30,6 +45,7 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
         return ViewHolder(view)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvGroupName.text = groupList[position].group_name
 
@@ -41,7 +57,47 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
         }
 
         holder.imgMore.setOnClickListener {
+            val layoutInflater = LayoutInflater.from(context)
+            val view = layoutInflater.inflate(R.layout.custom_dialog_alert, null)
 
+            val alertDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog)
+                .setView(view).create()
+
+
+            val alertBtnCancel = view.findViewById<ImageButton>(R.id.alertBtnCancel)
+            val alertTvTitle = view.findViewById<TextView>(R.id.alertTvTitle)
+            val alertTvContent = view.findViewById<TextView>(R.id.alertTvContent)
+            val alertBtnOk = view.findViewById<Button>(R.id.alertBtnOk)
+
+            alertTvTitle.text = "그룹나가기"
+            alertTvContent.text = "${groupList[position].group_name} 그룹을 나가시겠습니까 ?"
+
+            alertBtnOk.setOnClickListener {
+                loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+                memId = loginSp.getString("mem_id", "").toString()
+                val group_seq = groupList[position].group_seq
+
+                val req = GroupVO(group_seq, memId)
+                RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody>{
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val res = response.body()?.string()
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+            }
+
+            alertBtnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
         }
     }
 
