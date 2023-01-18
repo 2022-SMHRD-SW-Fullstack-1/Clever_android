@@ -1,5 +1,6 @@
 package com.example.clever.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +21,7 @@ import com.example.clever.model.GroupVO
 import com.example.clever.model.NoticeVO
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.home.notice.NoticeFolderInActivity
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,7 +83,7 @@ class NoticeFragmentAdapter(val context: Context, val categoryList: ArrayList<Ca
             context.startActivity(intent)
         }
 
-        val reqLeader = GroupVO(categoryList[position].group_seq)
+        val reqLeader = GroupVO(categoryList[position].group_seq!!)
         RetrofitClient.api.groupInfo(reqLeader).enqueue(object : Callback<GroupVO>{
             override fun onResponse(call: Call<GroupVO>, response: Response<GroupVO>) {
                 val res = response.body()!!
@@ -90,6 +94,45 @@ class NoticeFragmentAdapter(val context: Context, val categoryList: ArrayList<Ca
                 TODO("Not yet implemented")
             }
         })
+
+        holder.noticeCategoryImgMore.setOnClickListener {
+            val layoutInflater = LayoutInflater.from(context)
+            val view = layoutInflater.inflate(R.layout.custom_dialog_alert, null)
+
+            val alertDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog)
+                .setView(view).create()
+
+            val alertBtnCancel = view.findViewById<ImageButton>(R.id.alertBtnCancel)
+            val alertTvTitle = view.findViewById<TextView>(R.id.alertTvTitle)
+            val alertTvContent = view.findViewById<TextView>(R.id.alertTvContent)
+            val alertBtnOk = view.findViewById<Button>(R.id.alertBtnOk)
+
+            alertTvTitle.text = "폴더 삭제"
+            alertTvContent.text = "${categoryList[position].cate_name} 폴더를 삭제하시겠습니까 ?"
+
+            alertBtnOk.setOnClickListener {
+                val cate_seq = categoryList[position].cate_seq
+
+                val req = CategoryVO(cate_seq!!)
+                RetrofitClient.api.categoryDelete(req).enqueue(object : Callback<ResponseBody>{
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val res = response.body()?.string()
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+            }
+            alertBtnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+            alertDialog.show()
+        }
     }
 
     override fun getItemCount(): Int {

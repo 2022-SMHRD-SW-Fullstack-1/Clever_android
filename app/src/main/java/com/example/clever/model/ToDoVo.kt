@@ -32,7 +32,10 @@ data class ToDoVo(
 
     @SerializedName("cate_name")
     val cate_name: String?,
+
+    @SerializedName("select_day")
+    var select_day: String?,
 ){
-    constructor(cate_seq: Int): this(null, cate_seq, null, null, null, null, null, null, null, null)
-    constructor(todo_seq: Int?, cate_seq: Int): this(todo_seq, cate_seq, null, null, null, null, null, null, null, null)
+    constructor(cate_seq: Int): this(null, cate_seq, null, null, null, null, null, null, null, null, null)
+    constructor(todo_seq: Int?, cate_seq: Int): this(todo_seq, cate_seq, null, null, null, null, null, null, null, null, null)
 }

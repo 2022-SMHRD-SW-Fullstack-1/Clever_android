@@ -97,4 +97,24 @@ interface RetrofitInterface {
     fun groupOut(
         @Body group_info: GroupVO
     ): Call<ResponseBody>
+
+    @POST("android/groupDelete")
+    fun groupDelete(
+        @Body group_info: GroupVO
+    ): Call<ResponseBody>
+
+    @POST("android/categoryDelete")
+    fun categoryDelete(
+        @Body cate_info: CategoryVO
+    ): Call<ResponseBody>
+
+    @POST("android/noticeDelete")
+    fun noticeDelete(
+        @Body notice_info: NoticeVO
+    ): Call<ResponseBody>
+
+    @POST("android/todoCmpl")
+    fun todoCmpl(
+        @Body todo_info: ToDoCompleteVO
+    ): Call<ResponseBody>
 }

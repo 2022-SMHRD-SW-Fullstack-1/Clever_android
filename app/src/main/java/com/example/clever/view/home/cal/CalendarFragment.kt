@@ -13,17 +13,21 @@ import com.example.clever.R
 import com.example.clever.databinding.FragmentCalendarBinding
 import com.example.clever.decorator.*
 import com.example.clever.decorator.calendar.*
+import com.example.clever.model.AttendanceVO
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CalendarFragment : Fragment() {
 
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
+
+    val workList = ArrayList<AttendanceVO>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -31,6 +35,20 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
+
+        // container
+        // todoCalendar
+
+        // template
+        // template_cal_rv
+
+        // item
+
+        // adapter
+
+        // adapter, container 연결
+
+        // event 처리
 
         val current = LocalDate.now()
         val formatterY = current.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))

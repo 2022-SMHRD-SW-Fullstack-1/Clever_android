@@ -1,5 +1,6 @@
 package com.example.clever.view.profile
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ class ProfilePwActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfilePwBinding
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_pw)

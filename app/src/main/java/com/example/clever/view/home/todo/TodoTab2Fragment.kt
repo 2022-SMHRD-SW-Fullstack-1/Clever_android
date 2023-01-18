@@ -16,29 +16,26 @@ import com.example.clever.utils.Time
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.properties.Delegates
 
 class TodoTab2Fragment : Fragment() {
 
     private var _binding: FragmentTodoTab2Binding? = null
     private val binding get() = _binding!!
 
-    lateinit var cate_seq: String
-
     // item
     val cmplList = ArrayList<ToDoCompleteVO>()
 
     // adapter
-    lateinit var adapter: ToDoTab2Adapter
+    private lateinit var adapter: ToDoTab2Adapter
 
-    lateinit var selectDate: String
+    private var viewPoint = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTodoTab2Binding.inflate(inflater, container, false)
-
-        cate_seq = activity?.intent?.getStringExtra("cate_seq")!!
 
         // container
         // todoTab2Rv
@@ -47,8 +44,9 @@ class TodoTab2Fragment : Fragment() {
         // fragment_todo_tab2
 
         // item
-        getCmplList()
+        // getCmplList()
 
+        viewPoint = true
         // adapter
         adapter = ToDoTab2Adapter(
             requireContext(),
@@ -65,11 +63,7 @@ class TodoTab2Fragment : Fragment() {
         return binding.root
     }
 
-    fun selectDate(res: String) {
-        selectDate = res
-    }
-
-    private fun getCmplList() {
+    fun getCmplList(cate_seq: String, selectDate: String) {
         val req = ToDoCompleteVO(cate_seq.toInt(), selectDate)
         RetrofitClient.api.getToDoComplete(req)
             .enqueue(object : Callback<List<ToDoCompleteVO>> {
@@ -79,14 +73,12 @@ class TodoTab2Fragment : Fragment() {
                 ) {
                     cmplList.clear()
                     val res = response.body()
-                    Log.d("tab2", res.toString())
                     for (i in 0 until res!!.size) {
-                        val today = Time.getTime()
                         val date = res[i].cmpl_time
                         val dateSub = date!!.substring(0, 10)
-                        if (today == dateSub) cmplList.add(res[i])
+                        if (selectDate == dateSub) cmplList.add(res[i])
                     }
-                    adapter.notifyDataSetChanged()
+                    if(viewPoint) adapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {

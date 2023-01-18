@@ -13,10 +13,11 @@ data class CategoryVO(
     val cate_name: String?,
 
     @SerializedName("group_seq")
-    val group_seq: Int,
+    val group_seq: Int?,
 
     @SerializedName("count")
     val count: Int?,
 ) {
+    constructor(cate_seq: Int) : this(cate_seq, null, null, null, null)
     constructor(group_seq: Int, cate_type: String) : this(null, cate_type, null, group_seq, null)
 }

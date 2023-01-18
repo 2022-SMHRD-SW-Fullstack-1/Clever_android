@@ -6,33 +6,25 @@
     android:layout_height="wrap_content"
     android:paddingBottom="16dp">
 
-    <ImageView
-        android:id="@+id/moreMemRvPic"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/moreMemRvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="이름"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/moreMemRvPic"
-        app:layout_constraintTop_toTopOf="@+id/moreMemRvPic" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/moreMemRvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="가입날짜"
-        app:layout_constraintBottom_toBottomOf="@+id/moreMemRvPic"
         app:layout_constraintStart_toStartOf="@+id/moreMemRvName"
         app:layout_constraintTop_toBottomOf="@+id/moreMemRvName" />
 
@@ -42,9 +34,7 @@
         android:layout_height="32dp"
         android:tint="#ff0000"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/moreMemRvPic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/moreMemRvPic"
         app:srcCompat="@drawable/person_off" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

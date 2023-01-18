@@ -2,6 +2,8 @@ package com.example.clever.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +12,22 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
+import com.example.clever.model.ToDoCompleteVO
 import com.example.clever.model.ToDoVo
+import com.example.clever.retrofit.RetrofitClient
+import com.example.clever.utils.Time
 import com.example.clever.view.home.todo.TodoDetailActivity
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
     RecyclerView.Adapter<ToDoTab1Adapter.ViewHolder>() {
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId: String
+    val time = Time.getTime()
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val todolistImgType: ImageView
@@ -47,6 +60,34 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
             intent.putExtra("todo_seq", todoList[position].todo_seq.toString())
             intent.putExtra("cate_seq", todoList[position].cate_seq.toString())
             context.startActivity(intent)
+        }
+
+        loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
+
+        if (todoList[position].select_day.toString() == time) {
+            holder.todolistImgCheck.setOnClickListener {
+                val req = ToDoCompleteVO(
+                    todoList[position].todo_seq,
+                    memId,
+                    "",
+                    "N",
+                    todoList[position].cate_seq!!,
+                )
+                RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val res = response.body()?.string()
+                        Log.d("todoCmpl", res.toString())
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            }
         }
     }
 

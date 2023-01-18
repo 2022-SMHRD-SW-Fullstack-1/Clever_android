@@ -63,14 +63,13 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
             val alertDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog)
                 .setView(view).create()
 
-
             val alertBtnCancel = view.findViewById<ImageButton>(R.id.alertBtnCancel)
             val alertTvTitle = view.findViewById<TextView>(R.id.alertTvTitle)
             val alertTvContent = view.findViewById<TextView>(R.id.alertTvContent)
             val alertBtnOk = view.findViewById<Button>(R.id.alertBtnOk)
 
             alertTvTitle.text = "그룹나가기"
-            alertTvContent.text = "${groupList[position].group_name} 그룹을 나가시겠습니까 ?"
+            alertTvContent.text = "${groupList[position].group_name} 을/를 나가시겠습니까 ?"
 
             alertBtnOk.setOnClickListener {
                 loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
@@ -92,11 +91,9 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
                 })
 
             }
-
             alertBtnCancel.setOnClickListener {
                 alertDialog.dismiss()
             }
-
             alertDialog.show()
         }
     }
