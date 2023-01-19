@@ -29,7 +29,6 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val moreMemRvPic: ImageView
         val moreMemRvName: TextView
         val moreMemRvDate: TextView
         val moreMemRvOut: ImageView
@@ -38,7 +37,6 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
             loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
             memId = loginSp.getString("mem_id", "").toString()
 
-            moreMemRvPic = itemView.findViewById(R.id.moreMemRvPic)
             moreMemRvName = itemView.findViewById(R.id.moreMemRvName)
             moreMemRvDate = itemView.findViewById(R.id.moreMemRvDate)
             moreMemRvOut = itemView.findViewById(R.id.moreMemRvOut)

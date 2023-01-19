@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
 import com.example.clever.model.ToDoCompleteVO
@@ -17,7 +20,10 @@ import com.example.clever.model.ToDoVo
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.utils.Time
 import com.example.clever.view.home.todo.TodoDetailActivity
+import com.example.clever.view.home.todo.TodoListActivity
+import com.example.clever.view.home.todo.TodoTab1Fragment
 import okhttp3.ResponseBody
+import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,6 +73,8 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
 
         if (todoList[position].select_day.toString() == time) {
             holder.todolistImgCheck.setOnClickListener {
+                Log.d("todoList adapter img click", todoList.size.toString())
+
                 val req = ToDoCompleteVO(
                     todoList[position].todo_seq,
                     memId,
@@ -74,13 +82,14 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
                     "N",
                     todoList[position].cate_seq!!,
                 )
+
                 RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
-                        Log.d("todoCmpl", res.toString())
+                        Log.d("todoList adapter api", todoList.size.toString())
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

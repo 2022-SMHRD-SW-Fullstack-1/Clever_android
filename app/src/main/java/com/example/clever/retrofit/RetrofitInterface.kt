@@ -117,4 +117,9 @@ interface RetrofitInterface {
     fun todoCmpl(
         @Body todo_info: ToDoCompleteVO
     ): Call<ResponseBody>
+
+    @POST("android/getAttendance")
+    fun getAttendance(
+        @Body att_info: AttendanceVO
+    ): Call<List<AttendanceVO>>
 }

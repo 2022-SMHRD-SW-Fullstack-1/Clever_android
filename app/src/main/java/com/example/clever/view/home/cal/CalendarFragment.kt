@@ -1,9 +1,10 @@
 package com.example.clever.view.home.cal
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,13 @@ import com.example.clever.databinding.FragmentCalendarBinding
 import com.example.clever.decorator.*
 import com.example.clever.decorator.calendar.*
 import com.example.clever.model.AttendanceVO
+import com.example.clever.retrofit.RetrofitClient
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -27,7 +32,17 @@ class CalendarFragment : Fragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId: String
+    lateinit var group_seq: String
+
+    // 달력에 표시할 리스트
     val workList = ArrayList<AttendanceVO>()
+
+    // 리사이클러뷰에 표시할 리스트
+    val selectedList = ArrayList<AttendanceVO>()
+
+    lateinit var selectedDate: String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -36,6 +51,10 @@ class CalendarFragment : Fragment() {
     ): View? {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
+        loginSp = requireContext().getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
+        group_seq = activity?.intent?.getStringExtra("group_seq").toString()
+
         // container
         // todoCalendar
 
@@ -43,6 +62,7 @@ class CalendarFragment : Fragment() {
         // template_cal_rv
 
         // item
+        getAttendance()
 
         // adapter
 
@@ -53,6 +73,7 @@ class CalendarFragment : Fragment() {
         val current = LocalDate.now()
         val formatterY = current.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))
         val formatterD = current.format(DateTimeFormatter.ofPattern("yyyy.MM.DD"))
+        selectedDate = current.format((DateTimeFormatter.ofPattern("yyyy-MM-DD")))
 
         // 초기화시 오늘 날짜 선택, 연월 숨기기
         binding.calendarCv.selectedDate = CalendarDay.today()
@@ -121,6 +142,8 @@ class CalendarFragment : Fragment() {
 
             var selectDate = "${year}.${month}.${day}"
             binding.calendarTvDate.text = selectDate
+            selectedDate = "${year}-${month}-${day}"
+            selectedList()
 
             binding.calendarCv.removeDecorators()
             binding.calendarCv.addDecorators(
@@ -141,4 +164,37 @@ class CalendarFragment : Fragment() {
         _binding = null
     }
 
+    private fun getAttendance() {
+        val req = AttendanceVO(memId, group_seq.toInt())
+        RetrofitClient.api.getAttendance(req).enqueue(object : Callback<List<AttendanceVO>> {
+            override fun onResponse(
+                call: Call<List<AttendanceVO>>,
+                response: Response<List<AttendanceVO>>
+            ) {
+                workList.clear()
+                selectedList.clear()
+                val res = response.body()
+                for (i in 0 until res!!.size) {
+                    workList.add(res[i])
+                    if (selectedDate == res[i].att_date!!.substring(0, 10)) selectedList.add(res[i])
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<AttendanceVO>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun selectedList() {
+        selectedList.clear()
+        for (i in 0 until workList.size) {
+            if (selectedDate == workList[i].att_date!!.substring(
+                    0,
+                    10
+                )
+            ) selectedList.add(workList[i])
+        }
+    }
 }

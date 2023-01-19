@@ -1,5 +1,6 @@
 package com.example.clever.view.home.todo
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TodoTab1Fragment : Fragment() {
+
 
     private var _binding: FragmentTodoTab1Binding? = null
     private val binding get() = _binding!!
@@ -41,6 +43,7 @@ class TodoTab1Fragment : Fragment() {
 
         // item
         // getTodoList
+        Log.d("todoList view", todoList.size.toString())
 
         // adapter
         adapter = ToDoTab1Adapter(
@@ -57,7 +60,7 @@ class TodoTab1Fragment : Fragment() {
         return binding.root
     }
 
-    fun getTodoList(cate_seq:String, selectDate: String) {
+    fun getTodoList(cate_seq: String, selectDate: String) {
         val req = ToDoVo(cate_seq.toInt())
         RetrofitClient.api.getToDoList(req).enqueue(object : Callback<List<ToDoVo>> {
             override fun onResponse(call: Call<List<ToDoVo>>, response: Response<List<ToDoVo>>) {
@@ -66,10 +69,9 @@ class TodoTab1Fragment : Fragment() {
 
                 for (i in 0 until res!!.size) {
                     todoList.add(res[i])
-                    Log.d("todoList $i", todoList[i].toString())
                     todoList[i].select_day = selectDate
-                    Log.d("todoList 수정 $i", todoList[i].toString())
                 }
+                Log.d("todoList fun getTodolist", todoList.size.toString())
                 getCmpl(cate_seq, selectDate)
             }
 
@@ -79,10 +81,12 @@ class TodoTab1Fragment : Fragment() {
         })
     }
 
-    private fun getCmpl(cate_seq: String, selectDate: String) {
+
+    fun getCmpl(cate_seq: String, selectDate: String) {
         val req = ToDoCompleteVO(cate_seq.toInt(), selectDate)
         RetrofitClient.api.getToDoComplete(req)
             .enqueue(object : Callback<List<ToDoCompleteVO>> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<List<ToDoCompleteVO>>,
                     response: Response<List<ToDoCompleteVO>>
@@ -96,6 +100,7 @@ class TodoTab1Fragment : Fragment() {
                             if (todoList[i].todo_seq == resSeq) {
                                 if (timeSub == selectDate) {
                                     todoList.removeAt(i)
+                                    Log.d("todoList fun getcmpl", todoList.size.toString())
                                     break
                                 }
                             }
@@ -109,4 +114,5 @@ class TodoTab1Fragment : Fragment() {
                 }
             })
     }
+
 }

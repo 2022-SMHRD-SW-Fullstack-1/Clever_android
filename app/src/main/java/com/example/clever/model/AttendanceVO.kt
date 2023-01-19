@@ -2,7 +2,7 @@ package com.example.clever.model
 
 import com.google.gson.annotations.SerializedName
 
-class AttendanceVO(
+data class AttendanceVO(
     @SerializedName("att_seq")
     val att_seq: Int?,
 
@@ -27,11 +27,14 @@ class AttendanceVO(
     @SerializedName("group_seq")
     val group_seq: Int?,
 
+    @SerializedName("mem_name")
+    val mem_name: String?,
+
     @SerializedName("select_date")
     val select_date: String?,
 ) {
-    constructor(mem_id: String) : this(null, mem_id, null, null, null, null, null, null, null)
-    constructor(mem_id: String, select_date: String) : this(
+    constructor(mem_id: String, group_seq:Int) : this(null, mem_id, null, null, null, null, null, group_seq, null, null)
+    constructor(mem_id: String, select_date: String, group_seq:Int) : this(
         null,
         mem_id,
         null,
@@ -39,6 +42,7 @@ class AttendanceVO(
         null,
         null,
         null,
+        group_seq,
         null,
         select_date
     )
