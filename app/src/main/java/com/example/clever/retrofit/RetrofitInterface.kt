@@ -21,7 +21,7 @@ interface RetrofitInterface {
     fun login(
         @Body login_info: Member
     ): Call<ResponseBody>
-    
+
     // mainActivity groupList 가져오기
     @POST("android/getGroup")
     fun getGroup(
@@ -45,7 +45,7 @@ interface RetrofitInterface {
 
     @POST("android/groupMem")
     fun groupMem(
-        @Body group_info : GroupVO
+        @Body group_info: GroupVO
     ): Call<List<GroupVO>>
 
     @POST("android/getCategory")
@@ -122,4 +122,14 @@ interface RetrofitInterface {
     fun getAttendance(
         @Body att_info: AttendanceVO
     ): Call<List<AttendanceVO>>
+
+    @POST("android/getAtt")
+    fun getAtt(
+        @Body att_info: AttendanceVO
+    ): Call<AttendanceVO>
+
+    @POST("android/attCh")
+    fun attCh(
+        @Body att_info: ChangeAttendanceVO
+    ): Call<ResponseBody>
 }

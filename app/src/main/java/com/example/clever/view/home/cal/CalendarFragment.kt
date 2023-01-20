@@ -1,16 +1,19 @@
 package com.example.clever.view.home.cal
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.clever.R
+import com.example.clever.adapter.CalendarAdapter
 import com.example.clever.databinding.FragmentCalendarBinding
 import com.example.clever.decorator.*
 import com.example.clever.decorator.calendar.*
@@ -25,7 +28,6 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 
 class CalendarFragment : Fragment() {
 
@@ -38,11 +40,14 @@ class CalendarFragment : Fragment() {
 
     // 달력에 표시할 리스트
     val workList = ArrayList<AttendanceVO>()
+    val calList = ArrayList<CalendarDay>()
 
     // 리사이클러뷰에 표시할 리스트
     val selectedList = ArrayList<AttendanceVO>()
 
     lateinit var selectedDate: String
+
+    lateinit var adapter : CalendarAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -65,10 +70,22 @@ class CalendarFragment : Fragment() {
         getAttendance()
 
         // adapter
+        adapter = CalendarAdapter(
+            requireContext(),
+            selectedList
+        )
 
         // adapter, container 연결
+        binding.calendarRvSchedule.adapter = adapter
+        binding.calendarRvSchedule.layoutManager = GridLayoutManager(requireContext(), 1)
 
         // event 처리
+        binding.calendarBtnSalary.setOnClickListener {
+            val intent = Intent(requireContext(), CalculateActivity::class.java)
+            intent.putExtra("mem_id", memId)
+            intent.putExtra("group_seq", group_seq)
+            requireContext().startActivity(intent)
+        }
 
         val current = LocalDate.now()
         val formatterY = current.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))
@@ -93,7 +110,7 @@ class CalendarFragment : Fragment() {
             saturdayDecorator,
             sundayDecorator,
             calendarDecorator,
-            selectDecorator
+            selectDecorator,
         )
 
         // header, 요일 한글로 변경
@@ -114,6 +131,7 @@ class CalendarFragment : Fragment() {
                 calendarDecorator,
                 selectDecorator
             )
+            binding.calendarCv.addDecorator(AttendanceDecorator(Color.parseColor("#ff0000"), calList))
             binding.calendarCv.addDecorator(OtherMonthDecorator(month.toInt() - 1))
         }
         binding.calendarCv.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)));
@@ -153,6 +171,7 @@ class CalendarFragment : Fragment() {
                 calendarDecorator,
                 selectDecorator
             )
+            binding.calendarCv.addDecorator(AttendanceDecorator(Color.parseColor("#ff0000"), calList))
             binding.calendarCv.addDecorator(OtherMonthDecorator(month.toInt() - 1))
         }
 
@@ -173,12 +192,19 @@ class CalendarFragment : Fragment() {
             ) {
                 workList.clear()
                 selectedList.clear()
+                calList.clear()
                 val res = response.body()
                 for (i in 0 until res!!.size) {
                     workList.add(res[i])
-                    if (selectedDate == res[i].att_date!!.substring(0, 10)) selectedList.add(res[i])
-
+                    val year = res[i].att_date?.substring(0, 4)
+                    val month = res[i].att_date?.substring(5, 7)
+                    val day = res[i].att_date?.substring(8, 10)
+                    calList.add(CalendarDay(year!!.toInt(), month!!.toInt()-1, day!!.toInt()))
+                    if (selectedDate == res[i].att_date!!.substring(0, 10)) {
+                        selectedList.add(res[i])
+                    }
                 }
+                binding.calendarCv.addDecorator(AttendanceDecorator(Color.parseColor("#ff0000"), calList))
             }
 
             override fun onFailure(call: Call<List<AttendanceVO>>, t: Throwable) {
@@ -194,7 +220,10 @@ class CalendarFragment : Fragment() {
                     0,
                     10
                 )
-            ) selectedList.add(workList[i])
+            ) {
+                selectedList.add(workList[i])
+            }
         }
+        adapter.notifyDataSetChanged()
     }
 }

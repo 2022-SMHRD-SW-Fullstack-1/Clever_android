@@ -33,6 +33,7 @@ data class AttendanceVO(
     @SerializedName("select_date")
     val select_date: String?,
 ) {
+    constructor(att_seq: Int?) : this(att_seq, null, null, null, null, null, null, null, null, null)
     constructor(mem_id: String, group_seq:Int) : this(null, mem_id, null, null, null, null, null, group_seq, null, null)
     constructor(mem_id: String, select_date: String, group_seq:Int) : this(
         null,
@@ -45,5 +46,17 @@ data class AttendanceVO(
         group_seq,
         null,
         select_date
+    )
+    constructor(att_seq: Int, att_sche_start_time: String, att_sche_end_time:String, group_seq: Int?) : this(
+        att_seq,
+        null,
+        null,
+        att_sche_start_time,
+        att_sche_end_time,
+        null,
+        null,
+        group_seq,
+        null,
+        null
     )
 }
