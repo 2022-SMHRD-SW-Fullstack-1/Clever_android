@@ -17,4 +17,5 @@ data class Member(
 ) {
     constructor(mem_id: String) : this(mem_id, null, null, null )
     constructor(mem_id: String, mem_pw: String) : this(mem_id, mem_pw, null, null )
+    constructor(mem_id: String, mem_pw: String?, mem_email: String) : this(mem_id, mem_pw, null, mem_email )
 }

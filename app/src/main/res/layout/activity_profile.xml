@@ -38,7 +38,10 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/background_radius"
         android:elevation="10dp"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="24dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
@@ -48,14 +51,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="이름"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/profileImgChange"
-            app:layout_constraintStart_toEndOf="@+id/profileImgPic"
-            app:layout_constraintTop_toTopOf="@+id/profileImgPic" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/profileTvPhone"
@@ -72,19 +74,11 @@
             android:id="@+id/profileImgChange"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImgPic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profileImgPic"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/arrow_right" />
 
-        <ImageView
-            android:id="@+id/profileImgPic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

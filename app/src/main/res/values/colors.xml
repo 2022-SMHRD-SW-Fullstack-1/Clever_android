@@ -12,4 +12,5 @@
 
     <color name="mainColor">#3A4CA8</color>
     <color name="calendarSelect">#FFF29F</color>
+    <color name="calendarAtt">#F7CAFF</color>
 </resources>

@@ -88,7 +88,7 @@ class MainSplashActivity : AppCompatActivity() {
                 val res = response.body()
                 if (res?.size == 1) {
                     val intent = Intent(this@MainSplashActivity, HomeActivity::class.java)
-                    intent.putExtra("group_seq", res[0].group_seq)
+                    intent.putExtra("group_seq", "${res[0].group_seq}")
                     intent.putExtra("group_name", res[0].group_name)
                     startActivity(intent)
                     finish()

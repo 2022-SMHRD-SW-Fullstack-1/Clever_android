@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/todoTab2Cl"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black">
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/todoTab2TvTitle"
@@ -21,9 +23,10 @@
         android:id="@+id/todoTab2TvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="완료자"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todoTab2TvTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

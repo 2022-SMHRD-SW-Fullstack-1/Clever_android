@@ -1,10 +1,10 @@
-package com.example.clever.decorator.main
+package com.example.clever.decorator.other
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class MainRvDecorator(private val margin: Int): RecyclerView.ItemDecoration() {
+class TodoFRvDecorator(private val margin: Int): RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

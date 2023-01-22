@@ -2,6 +2,7 @@ package com.example.clever.decorator.calendar
 
 import android.graphics.Color
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade

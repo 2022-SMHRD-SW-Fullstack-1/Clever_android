@@ -1,7 +1,6 @@
 package com.example.clever.retrofit
 
-import com.example.clever.model.GroupVO
-import com.example.clever.model.Member
+import com.example.clever.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -11,21 +10,19 @@ interface RetrofitInterface {
     @GET("android/hello")
     fun hello(): Call<ResponseBody>
 
-    @POST("join")
-    fun join(
+    // 회원가입
+    @POST("android/joinMember")
+    fun joinMember(
         @Body join_info: Member
     ): Call<ResponseBody>
 
+    // 로그인
     @POST("login")
     fun login(
         @Body login_info: Member
     ): Call<ResponseBody>
 
-    @POST("android/userInfo")
-    fun userInfo(
-        @Body user_info: Member
-    ): Call<Member>
-
+    // mainActivity groupList 가져오기
     @POST("android/getGroup")
     fun getGroup(
         @Body user_info: Member
@@ -36,18 +33,103 @@ interface RetrofitInterface {
         @Body group_info: GroupVO
     ): Call<GroupVO>
 
-    @POST("android/groupMemCount")
-    fun groupMemCount(
-        @Body group_info : GroupVO
-    ): Call<List<GroupVO>>
-
     @POST("android/joinDate")
     fun joinDate(
         @Body group_info: GroupVO
     ): Call<GroupVO>
 
+    @POST("android/userInfo")
+    fun userInfo(
+        @Body user_info: Member
+    ): Call<Member>
+
     @POST("android/groupMem")
     fun groupMem(
-        @Body group_info : GroupVO
+        @Body group_info: GroupVO
     ): Call<List<GroupVO>>
+
+    @POST("android/getCategory")
+    fun getCategory(
+        @Body cate_info: CategoryVO
+    ): Call<List<CategoryVO>>
+
+    @POST("android/getNotice")
+    fun getNotice(
+        @Body cate_info: NoticeVO
+    ): Call<List<NoticeVO>>
+
+    @POST("android/getNoticeDetail")
+    fun getNoticeDetail(
+        @Body notice_info: NoticeVO
+    ): Call<NoticeVO>
+
+    @POST("android/getToDoList")
+    fun getToDoList(
+        @Body todo_info: ToDoVo
+    ): Call<List<ToDoVo>>
+
+    @POST("android/getToDoComplete")
+    fun getToDoComplete(
+        @Body todo_info: ToDoCompleteVO
+    ): Call<List<ToDoCompleteVO>>
+
+    @POST("android/getToDo")
+    fun getToDo(
+        @Body todo_info: ToDoVo
+    ): Call<ToDoVo>
+
+    @POST("android/getToDoCmplList")
+    fun getToDoCmplList(
+        @Body cmpl_info: ToDoCompleteVO
+    ): Call<List<ToDoCompleteVO>>
+
+    @POST("android/getCode")
+    fun getCode(
+        @Body mem_info: Member
+    ): Call<ResponseBody>
+
+    @POST("android/changePw")
+    fun changePw(
+        @Body mem_info: Member
+    ): Call<ResponseBody>
+
+    @POST("android/groupOut")
+    fun groupOut(
+        @Body group_info: GroupVO
+    ): Call<ResponseBody>
+
+    @POST("android/groupDelete")
+    fun groupDelete(
+        @Body group_info: GroupVO
+    ): Call<ResponseBody>
+
+    @POST("android/categoryDelete")
+    fun categoryDelete(
+        @Body cate_info: CategoryVO
+    ): Call<ResponseBody>
+
+    @POST("android/noticeDelete")
+    fun noticeDelete(
+        @Body notice_info: NoticeVO
+    ): Call<ResponseBody>
+
+    @POST("android/todoCmpl")
+    fun todoCmpl(
+        @Body todo_info: ToDoCompleteVO
+    ): Call<ResponseBody>
+
+    @POST("android/getAttendance")
+    fun getAttendance(
+        @Body att_info: AttendanceVO
+    ): Call<List<AttendanceVO>>
+
+    @POST("android/getAtt")
+    fun getAtt(
+        @Body att_info: AttendanceVO
+    ): Call<AttendanceVO>
+
+    @POST("android/attCh")
+    fun attCh(
+        @Body att_info: ChangeAttendanceVO
+    ): Call<ResponseBody>
 }

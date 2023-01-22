@@ -3,11 +3,10 @@ package com.example.clever.view.home.more
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.clever.R
 import com.example.clever.adapter.MoreMemberAdapter
 import com.example.clever.databinding.ActivityMoreMemberBinding
-import com.example.clever.decorator.main.MainRvDecorator
 import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
 import com.example.clever.retrofit.RetrofitClient
@@ -53,7 +52,7 @@ class MoreMemberActivity : AppCompatActivity() {
 
         // adapter, container 연결
         binding.moreMemberRv.adapter = adapter
-        binding.moreMemberRv.layoutManager = LinearLayoutManager(this@MoreMemberActivity)
+        binding.moreMemberRv.layoutManager = GridLayoutManager(this@MoreMemberActivity, 1)
 
         binding.moreMemImgBack.setOnClickListener {
             finish()
@@ -102,7 +101,7 @@ class MoreMemberActivity : AppCompatActivity() {
         RetrofitClient.api.groupMem(groupInfo).enqueue(object : Callback<List<GroupVO>> {
             override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
                 val res = response.body()
-                binding.moreMemTvCount.text = res!!.size.toString()
+                binding.moreMemTvCount.text = ((res!!.size)-1).toString()
 
                 for (i in 0 until res!!.size) {
                     if (mem_id != res[i].mem_id) memberList.add(res[i])
