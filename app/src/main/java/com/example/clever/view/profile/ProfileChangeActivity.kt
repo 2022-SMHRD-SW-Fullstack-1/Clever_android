@@ -4,8 +4,15 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.clever.R
 import com.example.clever.databinding.ActivityProfileChangeBinding
+import com.example.clever.model.Member
+import com.example.clever.retrofit.RetrofitClient
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileChangeActivity : AppCompatActivity() {
 
@@ -26,7 +33,7 @@ class ProfileChangeActivity : AppCompatActivity() {
         binding = ActivityProfileChangeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.profileChangeEtLastName.setText(memName)
+        binding.profileChangeEtName.setText(memName)
         binding.profileChangeEtPhone.setText(memId)
         binding.profileChangeEtPhone.isEnabled = false
 
@@ -35,7 +42,27 @@ class ProfileChangeActivity : AppCompatActivity() {
         }
 
         binding.profileChangeBtnProfile.setOnClickListener {
-            finish()
+            chName()
         }
+    }
+
+    private fun chName(){
+        val name = binding.profileChangeEtName.text.toString()
+        val req = Member(memId, null, name, null)
+        RetrofitClient.api.chName(req).enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val res = response.body()?.string()
+                if(res.toString() == "1"){
+                    Toast.makeText(this@ProfileChangeActivity, "이름이 변경 되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }else{
+                    Toast.makeText(this@ProfileChangeActivity, "이름 변경에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

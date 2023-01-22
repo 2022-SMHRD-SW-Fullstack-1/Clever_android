@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.clever.R
 import com.example.clever.databinding.ActivityNoticeContentBinding
@@ -73,6 +74,12 @@ class NoticeContentActivity : AppCompatActivity() {
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
+                        if(res.toString() == "1"){
+                            Toast.makeText(this@NoticeContentActivity, "$notice_title 을/를 삭제 하였습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }else{
+                            Toast.makeText(this@NoticeContentActivity, "$notice_title 을/를 삭제에 실패했습니다..", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

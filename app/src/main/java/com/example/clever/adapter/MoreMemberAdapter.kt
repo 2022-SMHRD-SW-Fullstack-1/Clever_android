@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
@@ -94,6 +95,11 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
+                        if(res.toString() == "1"){
+                            Toast.makeText(context, "${memberList[position].mem_name} 을/를 추방하였습니다.", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(context, "추방에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

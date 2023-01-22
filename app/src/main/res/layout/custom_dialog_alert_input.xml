@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_radius"
+        android:elevation="5dp"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/alertInputTvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/alertInputEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/background_radius_gray"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/alertInputTvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/alertInputTvTitle" />
+
+        <Button
+            android:id="@+id/alertInputBtnCancel"
+            android:layout_width="64dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_main"
+            android:text="취소"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/alertInputBtnAccept"
+            app:layout_constraintEnd_toStartOf="@+id/alertInputBtnAccept"
+            app:layout_constraintTop_toTopOf="@+id/alertInputBtnAccept" />
+
+        <Button
+            android:id="@+id/alertInputBtnAccept"
+            android:layout_width="64dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_main"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/alertInputEt"
+            app:layout_constraintTop_toBottomOf="@+id/alertInputEt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/dialog_bg"
+        android:elevation="5dp"
+        android:src="@drawable/alert"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout16"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout16"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

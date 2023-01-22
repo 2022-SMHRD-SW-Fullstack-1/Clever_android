@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -84,10 +85,10 @@ class NoticeFragmentAdapter(val context: Context, val categoryList: ArrayList<Ca
         }
 
         val reqLeader = GroupVO(categoryList[position].group_seq!!)
-        RetrofitClient.api.groupInfo(reqLeader).enqueue(object : Callback<GroupVO>{
+        RetrofitClient.api.groupInfo(reqLeader).enqueue(object : Callback<GroupVO> {
             override fun onResponse(call: Call<GroupVO>, response: Response<GroupVO>) {
                 val res = response.body()!!
-                if(res.mem_id == memId) holder.noticeCategoryImgMore.isVisible = true
+                if (res.mem_id == memId) holder.noticeCategoryImgMore.isVisible = true
             }
 
             override fun onFailure(call: Call<GroupVO>, t: Throwable) {
@@ -114,12 +115,25 @@ class NoticeFragmentAdapter(val context: Context, val categoryList: ArrayList<Ca
                 val cate_seq = categoryList[position].cate_seq
 
                 val req = CategoryVO(cate_seq!!)
-                RetrofitClient.api.categoryDelete(req).enqueue(object : Callback<ResponseBody>{
+                RetrofitClient.api.categoryDelete(req).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
+                        if (res.toString() == "1") {
+                            Toast.makeText(
+                                context,
+                                "${categoryList[position].cate_name} 폴더를 삭제했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "${categoryList[position].cate_name} 폴더를 삭제에 실패했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

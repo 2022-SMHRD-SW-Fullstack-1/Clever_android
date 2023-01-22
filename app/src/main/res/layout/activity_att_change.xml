@@ -82,7 +82,7 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView44">
+        app:layout_constraintTop_toBottomOf="@+id/attChTvDate">
 
         <TextView
             android:id="@+id/attStart"
@@ -94,7 +94,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/textView54"
-            app:layout_constraintTop_toBottomOf="@+id/textView44" />
+            app:layout_constraintTop_toBottomOf="@+id/attChTvDate" />
 
         <TextView
             android:id="@+id/textView54"
@@ -172,19 +172,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView47"
+        android:id="@+id/attChTvDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="일요일"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView44"
-        app:layout_constraintStart_toEndOf="@+id/textView44"
-        app:layout_constraintTop_toTopOf="@+id/textView44" />
+        app:layout_constraintBottom_toBottomOf="@+id/attChTvDate"
+        app:layout_constraintStart_toEndOf="@+id/attChTvDate"
+        app:layout_constraintTop_toTopOf="@+id/attChTvDate" />
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/attChTvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.example.clever.R
 import com.example.clever.databinding.FragmentMoreBinding
 import com.example.clever.model.GroupVO
@@ -78,10 +79,10 @@ class MoreFragment : Fragment() {
 
             if (state) {
                 alertTvTitle.text = "그룹 삭제하기"
-                alertTvContent.text = "${group_name} 을/를 삭제하시겠습니까 ?"
+                alertTvContent.text = "$group_name 을/를 삭제하시겠습니까 ?"
             } else {
                 alertTvTitle.text = "그룹 나가기"
-                alertTvContent.text = "${group_name} 을/를 나가시겠습니까 ?"
+                alertTvContent.text = "$group_name 을/를 나가시겠습니까 ?"
             }
 
             alertBtnOk.setOnClickListener {
@@ -89,33 +90,39 @@ class MoreFragment : Fragment() {
                 memId = loginSp.getString("mem_id", "").toString()
 
                 val req = GroupVO(group_seq.toInt(), memId)
-                if (state) {
-                    RetrofitClient.api.groupDelete(req).enqueue(object : Callback<ResponseBody> {
-                        override fun onResponse(
-                            call: Call<ResponseBody>,
-                            response: Response<ResponseBody>
-                        ) {
-                            val res = response.body()?.string()
-                        }
+                RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val res = response.body()?.string()
+                        Log.d("groupOut", res.toString())
+                        if (res.toString() == "1") {
+                            if (state) {
+                                Toast.makeText(
+                                    context,
+                                    "$group_name 을/를 삭제했습니다.",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
 
-                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                            TODO("Not yet implemented")
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "$group_name 을/를 나갔습니다.",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                            alertDialog.dismiss()
+                            activity?.finish()
                         }
-                    })
-                }else{
-                    RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody> {
-                        override fun onResponse(
-                            call: Call<ResponseBody>,
-                            response: Response<ResponseBody>
-                        ) {
-                            val res = response.body()?.string()
-                        }
+                    }
 
-                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-                }
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
             }
 

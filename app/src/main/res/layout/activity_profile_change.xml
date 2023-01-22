@@ -73,14 +73,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/profileChangeEtLastName"
+                android:id="@+id/profileChangeEtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:padding="16dp"
-                android:text="박형주" />
+                android:padding="16dp" />
 
             <TextView
                 android:id="@+id/profileChangeTvPhone"
@@ -98,8 +97,7 @@
                 android:background="@drawable/input"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:padding="16dp"
-                android:text="010-0000-0000" />
+                android:padding="16dp" />
 
         </LinearLayout>
 

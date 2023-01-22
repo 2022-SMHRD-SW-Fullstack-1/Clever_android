@@ -98,11 +98,6 @@ interface RetrofitInterface {
         @Body group_info: GroupVO
     ): Call<ResponseBody>
 
-    @POST("android/groupDelete")
-    fun groupDelete(
-        @Body group_info: GroupVO
-    ): Call<ResponseBody>
-
     @POST("android/categoryDelete")
     fun categoryDelete(
         @Body cate_info: CategoryVO
@@ -131,5 +126,15 @@ interface RetrofitInterface {
     @POST("android/attCh")
     fun attCh(
         @Body att_info: ChangeAttendanceVO
+    ): Call<ResponseBody>
+
+    @POST("android/chName")
+    fun chName(
+        @Body mem_info: Member
+    ): Call<ResponseBody>
+
+    @POST("android/withdrawal")
+    fun withdrawal(
+        @Body mem_info: Member
     ): Call<ResponseBody>
 }

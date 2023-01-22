@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.clever.R
 import com.example.clever.databinding.ActivityAttChangeBinding
 import com.example.clever.model.AttendanceVO
@@ -18,7 +19,9 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.SimpleFormatter
 
 class AttChangeActivity : AppCompatActivity() {
 
@@ -120,9 +123,26 @@ class AttChangeActivity : AppCompatActivity() {
                 binding.attStartCh.text = start_time
                 binding.attEndCh.text = end_time
 
-                memId = res.mem_id.toString()
                 att_date = res.att_date.toString()
+                binding.attChTvDate.text = att_date
+
+                memId = res.mem_id.toString()
                 group_seq = res.group_seq.toString()
+
+                val formatter = SimpleDateFormat("yyyy-MM-dd")
+                val dateTime = formatter.parse(att_date)
+                val cal = Calendar.getInstance()
+                cal.time = dateTime
+                val dayNum = cal.get(Calendar.DAY_OF_WEEK)
+                when (dayNum) {
+                    1 -> binding.attChTvDay.text = "일요일"
+                    2 -> binding.attChTvDay.text = "월요일"
+                    3 -> binding.attChTvDay.text = "화요일"
+                    4 -> binding.attChTvDay.text = "수요일"
+                    5 -> binding.attChTvDay.text = "목요일"
+                    6 -> binding.attChTvDay.text = "금요일"
+                    7 -> binding.attChTvDay.text = "토요일"
+                }
             }
 
             override fun onFailure(call: Call<AttendanceVO>, t: Throwable) {
@@ -132,12 +152,23 @@ class AttChangeActivity : AppCompatActivity() {
     }
 
     private fun attCh() {
-        val req = ChangeAttendanceVO(att_seq.toInt(), memId, start_ch, end_ch, att_date, group_seq.toInt())
+        val req = ChangeAttendanceVO(
+            att_seq.toInt(),
+            memId,
+            start_ch,
+            end_ch,
+            att_date,
+            group_seq.toInt()
+        )
         Log.d("req", req.toString())
         RetrofitClient.api.attCh(req).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val res = response.body()?.string()
                 Log.d("변경완료", res.toString())
+                if(res.toString() == "1"){
+                    Toast.makeText(this@AttChangeActivity, "요청에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
