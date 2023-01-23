@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GroupVO(
     @SerializedName("group_seq")
-    val group_seq: Int,
+    val group_seq: Int?,
 
     @SerializedName("group_name")
     val group_name: String?,

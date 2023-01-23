@@ -26,7 +26,24 @@ data class NoticeVO(
 
     @SerializedName("mem_name")
     val mem_name: String?,
-){
-    constructor(cate_seq: Int):this(null, cate_seq, null, null, null, null, null, null)
-    constructor(notice_seq: Int, cate_seq: Int):this(notice_seq, cate_seq, null, null, null, null, null, null)
+) {
+    constructor(cate_seq: Int) : this(null, cate_seq, null, null, null, null, null, null)
+    constructor(notice_seq: Int, cate_seq: Int) : this(
+        notice_seq,
+        cate_seq,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    )
+
+    constructor(
+        cate_seq: Int,
+        notice_title: String?,
+        notice_content: String?,
+        notice_photo: String?,
+        mem_id: String?
+    ) : this(null, cate_seq, notice_title, notice_content, null, notice_photo, mem_id, null)
 }

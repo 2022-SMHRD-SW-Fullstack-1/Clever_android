@@ -137,4 +137,29 @@ interface RetrofitInterface {
     fun withdrawal(
         @Body mem_info: Member
     ): Call<ResponseBody>
+
+    @POST("android/noticeWrite")
+    fun noticeWrite(
+        @Body notice_info: NoticeVO
+    ): Call<ResponseBody>
+
+    @POST("android/joinGroup")
+    fun joinGroup(
+        @Body group_info: GroupVO
+    ): Call<ResponseBody>
+
+    @POST("android/writeComment")
+    fun writeComment(
+        @Body com_info: NoticeCommentVO
+    ): Call<ResponseBody>
+
+    @POST("android/getComment")
+    fun getComment(
+        @Body com_info: NoticeCommentVO
+    ): Call<List<NoticeCommentVO>>
+
+    @POST("android/deleteComment")
+    fun deleteComment(
+        @Body com_info: NoticeCommentVO
+    ): Call<ResponseBody>
 }

@@ -60,6 +60,13 @@ class NoticeFolderInActivity : AppCompatActivity() {
         binding.noticeFolderBack.setOnClickListener {
             finish()
         }
+
+        binding.noticeFolderBtn.setOnClickListener {
+            val intent = Intent(this@NoticeFolderInActivity, NoticeWriteActivity::class.java)
+            intent.putExtra("cate_seq", cate_seq)
+            intent.putExtra("cate_name", cate_name)
+            startActivity(intent)
+        }
     }
 
     private fun getNoticeList() {

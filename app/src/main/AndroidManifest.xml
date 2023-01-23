@@ -17,6 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.home.notice.NoticeWriteActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.home.cal.CalculateActivity"
             android:exported="false"
             android:screenOrientation="portrait">

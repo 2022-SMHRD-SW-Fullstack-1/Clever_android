@@ -78,7 +78,7 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
                 memId = loginSp.getString("mem_id", "").toString()
                 val group_seq = groupList[position].group_seq
 
-                val req = GroupVO(group_seq, memId)
+                val req = GroupVO(group_seq!!.toInt(), memId)
                 RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody>{
                     override fun onResponse(
                         call: Call<ResponseBody>,

@@ -2,7 +2,6 @@ package com.example.clever.adapter
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
@@ -60,7 +59,7 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
 
         holder.moreMemRvName.text = memberList[position].mem_name
 
-        val req = GroupVO(memberList[position].group_seq)
+        val req = GroupVO(memberList[position].group_seq!!)
         RetrofitClient.api.groupInfo(req).enqueue(object : Callback<GroupVO> {
             override fun onResponse(call: Call<GroupVO>, response: Response<GroupVO>) {
                 val res = response.body()!!
@@ -88,7 +87,7 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
             alertTvContent.text = "${memberList[position].mem_name} 을/를 추방하시겠습니까 ?"
 
             alertBtnOk.setOnClickListener {
-                val req = GroupVO(memberList[position].group_seq, memberList[position].mem_id.toString())
+                val req = GroupVO(memberList[position].group_seq!!, memberList[position].mem_id.toString())
                 RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,

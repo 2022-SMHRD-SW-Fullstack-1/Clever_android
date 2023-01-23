@@ -158,56 +158,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="카테고리"
+        android:text="메모"
         android:textColor="@color/gray"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/view7"
         app:layout_constraintTop_toBottomOf="@+id/view7" />
-
-    <TextView
-        android:id="@+id/todoDetailCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView41"
-        app:layout_constraintStart_toEndOf="@+id/textView41"
-        app:layout_constraintTop_toTopOf="@+id/textView41" />
-
-    <View
-        android:id="@+id/view8"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="24dp"
-        android:background="#B8B8B8"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout13"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
-        app:layout_constraintTop_toBottomOf="@+id/todoDetailCategory" />
-
-    <TextView
-        android:id="@+id/textView43"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="반복"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/view8"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
-
-    <TextView
-        android:id="@+id/todoDetailRepeat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView43"
-        app:layout_constraintStart_toEndOf="@+id/textView43"
-        app:layout_constraintStart_toStartOf="@+id/todoDetailCategory"
-        app:layout_constraintTop_toTopOf="@+id/textView43" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -234,4 +190,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/todoDetailEtMemo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView41"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
+        app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+    <CheckBox
+        android:id="@+id/todoDetailCb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="특이사항등록"
+        app:layout_constraintEnd_toEndOf="@+id/todoDetailEtMemo"
+        app:layout_constraintTop_toBottomOf="@+id/todoDetailEtMemo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

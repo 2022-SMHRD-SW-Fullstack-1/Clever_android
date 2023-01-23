@@ -8,7 +8,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.clever.R
 import com.example.clever.adapter.MainAdapter
@@ -18,6 +21,7 @@ import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.profile.ProfileActivity
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,19 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         // Event 처리
         binding.mainBtnJoinGroup.setOnClickListener {
-            val etDialog = EditText(this@MainActivity)
-            val builder = AlertDialog.Builder(it.context)
-            builder.setTitle("코드입력")
-                .setView(etDialog)
-                .setPositiveButton("확인",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        groupCode = etDialog.text.toString()
-                    })
-                .setNegativeButton("취소",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        null
-                    }).create()
-            builder.show()
+            joinGroup()
         }
 
         binding.mainImgProfile.setOnClickListener {
@@ -113,4 +105,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 그룹 참여하기
+    private fun joinGroup(){
+        val view = layoutInflater.inflate(R.layout.custom_dialog_alert_input, null)
+        val dialog = AlertDialog.Builder(this@MainActivity, R.style.CustomAlertDialog).setView(view).create()
+
+        val alertInputTvTitle = view.findViewById<TextView>(R.id.alertInputTvTitle)
+        val alertInputEt = view.findViewById<EditText>(R.id.alertInputEt)
+        val alertInputBtnCancel = view.findViewById<Button>(R.id.alertInputBtnCancel)
+        val alertInputBtnAccept = view.findViewById<TextView>(R.id.alertInputBtnAccept)
+
+        alertInputTvTitle.text = "코드입력"
+
+        alertInputBtnAccept.setOnClickListener {
+            val group_serial = alertInputEt.text.toString()
+            val req = GroupVO(null, null, null, group_serial, memId, null, null)
+            RetrofitClient.api.joinGroup(req).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    val res = response.body()?.string()
+                    if(res.toString() == "1"){
+                        Toast.makeText(this@MainActivity, "그룹 추가 되었습니다.", Toast.LENGTH_SHORT).show()
+                        getGroup()
+                        dialog.dismiss()
+                    }else{
+                        Toast.makeText(this@MainActivity, "코드를 확인해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+        alertInputBtnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noticeContentCl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.notice.NoticeContentActivity">
@@ -63,7 +64,7 @@
             android:layout_marginTop="24dp"
             android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noticeContentTvContent" />
+            app:layout_constraintTop_toBottomOf="@+id/noticeContentImgPhoto" />
 
         <TextView
             android:id="@+id/textView37"
@@ -86,6 +87,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView37"
             app:layout_constraintStart_toEndOf="@+id/textView37"
             app:layout_constraintTop_toTopOf="@+id/textView37" />
+
+        <ImageView
+            android:id="@+id/noticeContentImgPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noticeContentTvContent"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
         <EditText
-            android:id="@+id/noticeContentTvComment"
+            android:id="@+id/noticeContentEtComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -111,21 +122,37 @@
             android:elevation="10dp"
             android:ems="10"
             android:hint="댓글 입력하기"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="textMultiLine"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnWriteComment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnWriteComment"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_main"
+            android:text="등록"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/noticeContentEtComment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/noticeContentEtComment" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/noticeContentCommentRv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noticeContentTvComment"
+            app:layout_constraintTop_toBottomOf="@+id/noticeContentEtComment"
             app:layout_constraintVertical_bias="0.609" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
