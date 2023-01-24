@@ -82,6 +82,7 @@ class NoticeFolderInActivity : AppCompatActivity() {
                 for (i in 0 until res!!.size) {
                     noticeList.add(res[i])
                 }
+                noticeList.reverse()
                 adapter.notifyDataSetChanged()
             }
 

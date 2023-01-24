@@ -145,7 +145,7 @@ class NoticeContentActivity : AppCompatActivity() {
         val alertBtnOk = view.findViewById<Button>(R.id.alertBtnOk)
 
         alertTvTitle.text = "게시글 삭제"
-        alertTvContent.text = "${notice_title} 을/를 삭제 하시겠습니까 ? "
+        alertTvContent.text = "$notice_title 을/를 삭제 하시겠습니까 ? "
 
         alertBtnOk.setOnClickListener {
             val req = NoticeVO(notice_seq.toInt(), cate_seq.toInt())
@@ -186,23 +186,32 @@ class NoticeContentActivity : AppCompatActivity() {
     private fun writeComment() {
         val comment = binding.noticeContentEtComment.text.toString()
         val req = NoticeCommentVO(null, notice_seq.toInt(), memId, null, comment, null)
-        RetrofitClient.api.writeComment(req).enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                val res = response.body()?.string()
-                if (res.toString() == "1") {
-                    binding.noticeContentEtComment.text = null
-                    getComment()
-                    hideKeyboard()
-                } else {
-                    Toast.makeText(this@NoticeContentActivity, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT)
-                        .show()
+        if (comment != "") {
+            RetrofitClient.api.writeComment(req).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    val res = response.body()?.string()
+                    if (res.toString() == "1") {
+                        binding.noticeContentEtComment.text = null
+                        getComment()
+                        hideKeyboard()
+                    } else {
+                        Toast.makeText(
+                            this@NoticeContentActivity,
+                            "댓글 작성에 실패했습니다.",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
     }
 
     private fun getComment() {

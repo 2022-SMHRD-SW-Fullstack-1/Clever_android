@@ -30,6 +30,7 @@ data class ChangeAttendanceVO(
     @SerializedName("group_seq")
     val group_seq: Int?,
 ) {
+    constructor(att_seq: Int):this(null, att_seq, null, null, null, null, null, null, null)
     constructor(
         att_seq: Int,
         mem_id: String?,

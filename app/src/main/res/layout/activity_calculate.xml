@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calculateCl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.cal.CalculateActivity">
@@ -28,5 +29,313 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_left" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="날짜입력"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <EditText
+        android:id="@+id/calEtStartYear"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="2023"
+        android:inputType="number"
+        android:maxLength="4"
+        android:nextFocusDown="@id/calEtStartMonth"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintStart_toEndOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="년"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartYear"
+        app:layout_constraintStart_toEndOf="@+id/calEtStartYear"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartYear" />
+
+    <EditText
+        android:id="@+id/calEtStartMonth"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="01"
+        android:inputType="number"
+        android:maxLength="2"
+        android:nextFocusDown="@id/calEtStartDay"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartYear"
+        app:layout_constraintStart_toEndOf="@+id/textView51"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartYear"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="월"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartMonth"
+        app:layout_constraintStart_toEndOf="@+id/calEtStartMonth"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartMonth" />
+
+    <EditText
+        android:id="@+id/calEtStartDay"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="01"
+        android:inputType="number"
+        android:maxLength="2"
+        android:nextFocusDown="@id/calEtEndYear"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartMonth"
+        app:layout_constraintStart_toEndOf="@+id/textView52"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartMonth"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="일"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartDay"
+        app:layout_constraintStart_toEndOf="@+id/calEtStartDay"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartDay" />
+
+    <EditText
+        android:id="@+id/calEtEndYear"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="2023"
+        android:inputType="number"
+        android:maxLength="4"
+        android:nextFocusDown="@id/calEtEndMonth"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/textView64"
+        app:layout_constraintStart_toStartOf="@+id/calEtStartYear"
+        app:layout_constraintTop_toTopOf="@+id/textView64" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="년"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtEndYear"
+        app:layout_constraintStart_toEndOf="@+id/calEtStartYear"
+        app:layout_constraintTop_toTopOf="@+id/calEtEndYear" />
+
+    <EditText
+        android:id="@+id/calEtEndMonth"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="01"
+        android:inputType="number"
+        android:maxLength="2"
+        android:nextFocusDown="@id/calEtEndDay"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtEndYear"
+        app:layout_constraintStart_toEndOf="@+id/textView59"
+        app:layout_constraintTop_toTopOf="@+id/calEtEndYear"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="월"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtEndMonth"
+        app:layout_constraintStart_toEndOf="@+id/calEtEndMonth"
+        app:layout_constraintTop_toTopOf="@+id/calEtEndMonth" />
+
+    <EditText
+        android:id="@+id/calEtEndDay"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="01"
+        android:inputType="number"
+        android:maxLength="2"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtEndMonth"
+        app:layout_constraintStart_toEndOf="@+id/textView60"
+        app:layout_constraintTop_toTopOf="@+id/calEtEndMonth"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView62"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="일"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtEndDay"
+        app:layout_constraintStart_toEndOf="@+id/calEtEndDay"
+        app:layout_constraintTop_toTopOf="@+id/calEtEndDay" />
+
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작 :"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtStartDay"
+        app:layout_constraintEnd_toEndOf="@+id/textView44"
+        app:layout_constraintTop_toTopOf="@+id/calEtStartDay" />
+
+    <TextView
+        android:id="@+id/textView64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="끝 :"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+    <Button
+        android:id="@+id/calBtnGetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_main"
+        android:padding="16dp"
+        android:text="근무시간 불러오기"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calEtEndYear" />
+
+    <EditText
+        android:id="@+id/calEtAttTime"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="근무시간"
+        android:inputType="number"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView66" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtAttTime"
+        app:layout_constraintStart_toEndOf="@+id/calEtAttTime"
+        app:layout_constraintTop_toTopOf="@+id/calEtAttTime"
+        app:srcCompat="@drawable/close" />
+
+    <EditText
+        android:id="@+id/calEtHourly"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="시급입력"
+        android:inputType="number"
+        android:padding="4dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtAttTime"
+        app:layout_constraintStart_toEndOf="@+id/imageView16"
+        app:layout_constraintTop_toTopOf="@+id/calEtAttTime" />
+
+    <ImageView
+        android:id="@+id/calImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtHourly"
+        app:layout_constraintStart_toEndOf="@+id/calEtHourly"
+        app:layout_constraintTop_toTopOf="@+id/calEtHourly"
+        app:srcCompat="@drawable/double_arrow_right" />
+
+    <TextView
+        android:id="@+id/calTvSalary"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:text="0원"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/calEtHourly"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calImg"
+        app:layout_constraintTop_toTopOf="@+id/calEtHourly" />
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:drawableLeft="@drawable/notice"
+        android:drawableTint="@color/gray"
+        android:gravity="center_vertical"
+        android:text="2023년 최저시급은 9,620원 입니다."
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calBtnGetTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

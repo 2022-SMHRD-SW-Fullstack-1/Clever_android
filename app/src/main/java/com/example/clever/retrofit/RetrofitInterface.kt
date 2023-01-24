@@ -162,4 +162,18 @@ interface RetrofitInterface {
     fun deleteComment(
         @Body com_info: NoticeCommentVO
     ): Call<ResponseBody>
+
+    @POST("android/checkAttCh")
+    fun checkAttCh(
+        @Body att_info: ChangeAttendanceVO
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("android/getAttTime")
+    fun getAttTime(
+        @Field("mem_id") mem_id: String,
+        @Field("group_seq") group_seq: Int,
+        @Field("start_date") start_date: String,
+        @Field("end_date") end_date: String,
+    ): Call<ResponseBody>
 }

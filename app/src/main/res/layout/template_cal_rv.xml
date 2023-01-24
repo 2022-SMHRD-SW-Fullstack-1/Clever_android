@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:padding="4dp"
-        android:text="09:00 ~ 15:00"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +32,95 @@
         android:text="근무변경요청"
         android:textColor="@color/white"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/calendarRvTvAtt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/calendarRvTvAtt" />
+
+    <Button
+        android:id="@+id/calendarRvBtnIng"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/button_ing_radius"
+        android:drawableLeft="@drawable/ing"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white"
+        android:padding="4dp"
+        android:text="요청중"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/calendarRvTvAtt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendarRvTvAtt" />
+
+    <Button
+        android:id="@+id/calendarRvBtnReject"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/button_reject_radius"
+        android:drawableLeft="@drawable/cancel"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white"
+        android:padding="4dp"
+        android:text="요청거절"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/calendarRvTvAtt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendarRvTvAtt" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rejectCl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/background_radius"
+        android:elevation="10dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/calendarRvBtnReject"
+        app:layout_constraintTop_toTopOf="@+id/calendarRvBtnReject">
+
+        <Button
+            android:id="@+id/calendarRvBtnReChange"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/button_main"
+            android:text="다시요청하기"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/calendarRvBtnMemo"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/button_reject_radius"
+            android:text="반려사유보기"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/calendarRvBtnReChange"
+            app:layout_constraintStart_toStartOf="@+id/calendarRvBtnReChange"
+            app:layout_constraintTop_toBottomOf="@+id/calendarRvBtnReChange" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/calendarRvTvMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/calendarRvBtnReject"
+        app:layout_constraintTop_toBottomOf="@+id/calendarRvBtnReject" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
