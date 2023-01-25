@@ -78,9 +78,10 @@ interface RetrofitInterface {
         @Body todo_info: ToDoVo
     ): Call<ToDoVo>
 
+    @FormUrlEncoded
     @POST("android/getToDoCmplList")
     fun getToDoCmplList(
-        @Body cmpl_info: ToDoCompleteVO
+        @Field("todo_seq") todo_seq: Int,
     ): Call<List<ToDoCompleteVO>>
 
     @POST("android/getCode")
@@ -175,5 +176,29 @@ interface RetrofitInterface {
         @Field("group_seq") group_seq: Int,
         @Field("start_date") start_date: String,
         @Field("end_date") end_date: String,
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("android/getMemo")
+    fun getMemo(
+        @Field("cmpl_time") cmpl_time: String,
+        @Field("group_seq") group_seq: Int,
+    ): Call<List<ToDoCompleteVO>>
+
+    @FormUrlEncoded
+    @POST("android/deleteTodoMemo")
+    fun deleteTodoMemo(
+        @Field("cmpl_seq") cmpl_seq: Int,
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("android/getCmpl")
+    fun getCmpl(
+        @Field("cmpl_seq") cmpl_seq: Int,
+    ): Call<ToDoCompleteVO>
+
+    @POST("android/todoModify")
+    fun todoModify(
+        @Body cmpl_info: ToDoCompleteVO
     ): Call<ResponseBody>
 }

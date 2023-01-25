@@ -58,45 +58,80 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
+
         holder.todolistTvTitle.text = todoList[position].todo_title
         holder.todolistTvName.text = todoList[position].mem_name
+
+        if(todoList[position].todo_method == "사진"){
+            holder.todolistImgType.setImageResource(R.drawable.camera)
+            if (todoList[position].select_day.toString() == time) {
+                holder.todolistImgCheck.setOnClickListener {
+
+                    // 카메라 키기
+                    // 카메라 키기
+                    // 카메라 키기
+                    // 카메라 키기
+
+                    val req = ToDoCompleteVO(
+                        todoList[position].todo_seq,
+                        memId,
+                        "",
+                        "N",
+                        todoList[position].cate_seq!!,
+                    )
+
+                    RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            val res = response.body()?.string()
+                            Log.d("todoList adapter api", todoList.size.toString())
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                }
+            }
+        }else{
+            holder.todolistImgType.setImageResource(R.drawable.todo_check)
+            if (todoList[position].select_day.toString() == time) {
+                holder.todolistImgCheck.setOnClickListener {
+                    val req = ToDoCompleteVO(
+                        todoList[position].todo_seq,
+                        memId,
+                        "",
+                        "",
+                        "N",
+                        todoList[position].cate_seq!!,
+                    )
+
+                    RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            val res = response.body()?.string()
+                            Log.d("todoList adapter api", todoList.size.toString())
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                }
+            }
+        }
 
         holder.todoTab1Cl.setOnClickListener {
             val intent = Intent(context, TodoDetailActivity::class.java)
             intent.putExtra("todo_seq", todoList[position].todo_seq.toString())
             intent.putExtra("cate_seq", todoList[position].cate_seq.toString())
             context.startActivity(intent)
-        }
-
-        loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
-        memId = loginSp.getString("mem_id", "").toString()
-
-        if (todoList[position].select_day.toString() == time) {
-            holder.todolistImgCheck.setOnClickListener {
-                Log.d("todoList adapter img click", todoList.size.toString())
-
-                val req = ToDoCompleteVO(
-                    todoList[position].todo_seq,
-                    memId,
-                    "",
-                    "N",
-                    todoList[position].cate_seq!!,
-                )
-
-                RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
-                        val res = response.body()?.string()
-                        Log.d("todoList adapter api", todoList.size.toString())
-                    }
-
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
-            }
         }
     }
 

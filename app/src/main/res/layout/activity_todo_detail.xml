@@ -125,13 +125,13 @@
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="할 일 설명"
         android:textColor="@color/gray"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
+        app:layout_constraintTop_toBottomOf="@+id/todoTvChargePerson" />
 
     <TextView
         android:id="@+id/todoDetailContent"
@@ -210,4 +210,17 @@
         android:text="특이사항등록"
         app:layout_constraintEnd_toEndOf="@+id/todoDetailEtMemo"
         app:layout_constraintTop_toBottomOf="@+id/todoDetailEtMemo" />
+
+    <TextView
+        android:id="@+id/todoTvChargePerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/todo_radius"
+        android:padding="4dp"
+        android:text="나소연 담당"
+        android:textColor="@color/mainColor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView33"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
 </androidx.constraintlayout.widget.ConstraintLayout>

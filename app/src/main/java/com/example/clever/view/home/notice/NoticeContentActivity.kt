@@ -2,11 +2,13 @@ package com.example.clever.view.home.notice
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageButton
@@ -34,6 +36,7 @@ class NoticeContentActivity : AppCompatActivity() {
 
     lateinit var notice_seq: String
     lateinit var cate_seq: String
+    lateinit var cate_name: String
     lateinit var notice_title: String
 
     lateinit var loginSp: SharedPreferences
@@ -49,6 +52,7 @@ class NoticeContentActivity : AppCompatActivity() {
 
         notice_seq = intent.getStringExtra("notice_seq").toString()
         cate_seq = intent.getStringExtra("cate_seq").toString()
+        cate_name = intent.getStringExtra("cate_name").toString()
 
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
@@ -80,6 +84,7 @@ class NoticeContentActivity : AppCompatActivity() {
         // event
         binding.noticeContentCl.setOnTouchListener { _, _ ->
             hideKeyboard()
+            binding.noticeContentMoreCl.visibility = View.GONE
             false
         }
 
@@ -89,7 +94,21 @@ class NoticeContentActivity : AppCompatActivity() {
         }
 
         binding.noticeContentImgMore.setOnClickListener {
+            binding.noticeContentMoreCl.visibility = View.VISIBLE
+        }
+
+        binding.noticeContentBtnDe.setOnClickListener {
+            binding.noticeContentMoreCl.visibility = View.GONE
             noticeDelete()
+        }
+
+        binding.noticeContentBtnCh.setOnClickListener {
+            binding.noticeContentMoreCl.visibility = View.GONE
+            val intent = Intent(this@NoticeContentActivity, NoticeWriteActivity::class.java)
+            intent.putExtra("notice_seq", notice_seq)
+            intent.putExtra("cate_seq", cate_seq)
+            intent.putExtra("cate_name", cate_name)
+            startActivity(intent)
         }
 
         binding.btnWriteComment.setOnClickListener {
@@ -223,7 +242,6 @@ class NoticeContentActivity : AppCompatActivity() {
             ) {
                 commentList.clear()
                 val res = response.body()
-                Log.d("getComment", res.toString())
                 for (i in 0 until res!!.size) {
                     commentList.add(res[i])
                 }

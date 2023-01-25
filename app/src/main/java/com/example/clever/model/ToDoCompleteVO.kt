@@ -32,10 +32,12 @@ data class ToDoCompleteVO(
 
     @SerializedName("todo_title")
     val todo_title: String?,
+
+    @SerializedName("todo_content")
+    val todo_content: String?,
 ) {
-    constructor(cate_seq: Int) : this(null, null, null, null, null, null, null, cate_seq, null, null)
-    constructor(cate_seq: Int, cmpl_time: String?) : this(null, null, null, cmpl_time, null, null, null, cate_seq, null, null)
-    constructor(todo_seq: Int?, cate_seq: Int, todo_title: String?) : this(null, todo_seq, null, null, null, null, null, cate_seq, null, todo_title)
-    constructor(todo_seq: Int?, mem_id: String?, cmpl_img:String?, cmpl_strange:String, cate_seq: Int) : this(null, todo_seq, mem_id, null, cmpl_img, null, cmpl_strange, cate_seq, null, null)
-    constructor(todo_seq: Int?, mem_id: String?, cmpl_img:String?, cmpl_memo: String?, cmpl_strange:String, cate_seq: Int) : this(null, todo_seq, mem_id, null, cmpl_img, cmpl_memo, cmpl_strange, cate_seq, null, null)
+    constructor(cate_seq: Int) : this(null, null, null, null, null, null, null, cate_seq, null, null, null)
+    constructor(cate_seq: Int, cmpl_time: String?) : this(null, null, null, cmpl_time, null, null, null, cate_seq, null, null, null)
+    constructor(todo_seq: Int?, mem_id: String?, cmpl_img:String?, cmpl_strange:String, cate_seq: Int) : this(null, todo_seq, mem_id, null, cmpl_img, null, cmpl_strange, cate_seq, null, null, null)
+    constructor(todo_seq: Int?, mem_id: String?, cmpl_img:String?, cmpl_memo: String?, cmpl_strange:String, cate_seq: Int) : this(null, todo_seq, mem_id, null, cmpl_img, cmpl_memo, cmpl_strange, cate_seq, null, null, null)
 }

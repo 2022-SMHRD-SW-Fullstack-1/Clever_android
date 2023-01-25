@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.clever.R
 import com.example.clever.databinding.ActivityTodoDetailBinding
@@ -27,7 +28,11 @@ class TodoDetailActivity : AppCompatActivity() {
     lateinit var todo_title: String
 
     lateinit var loginSp: SharedPreferences
-    private lateinit var memId:String
+    private lateinit var memId: String
+
+    lateinit var cmpl_seq: String
+
+    var todoModify = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,14 @@ class TodoDetailActivity : AppCompatActivity() {
 
         todo_seq = intent.getStringExtra("todo_seq").toString()
         cate_seq = intent.getStringExtra("cate_seq").toString()
+        cmpl_seq = intent.getStringExtra("cmpl_seq").toString()
+
+        if (intent.getStringExtra("cmpl_seq") == null) {
+            getTodo()
+        } else {
+            getCmpl()
+            todoModify = true
+        }
 
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
@@ -47,10 +60,12 @@ class TodoDetailActivity : AppCompatActivity() {
         }
 
         binding.todoDetailBtnCheck.setOnClickListener {
-            todoCmpl()
+            if (!todoModify) {
+                todoCmpl()
+            } else {
+                todoModify()
+            }
         }
-
-        getTodo()
 
         binding.todoDetailClCpl.setOnClickListener {
             val intent = Intent(this@TodoDetailActivity, TodoCompleteActivity::class.java)
@@ -65,10 +80,15 @@ class TodoDetailActivity : AppCompatActivity() {
         RetrofitClient.api.getToDo(req).enqueue(object : Callback<ToDoVo> {
             override fun onResponse(call: Call<ToDoVo>, response: Response<ToDoVo>) {
                 val res = response.body()!!
-                Log.d("gettodo", res.toString())
                 todo_title = res.todo_title.toString()
                 binding.todoDetailTvTitle.text = res.todo_title
                 binding.todoDetailContent.text = res.todo_content
+                if (res.mem_name.toString() == "" || res.mem_name.toString() == "null" || res.mem_name.toString() == null) {
+                    binding.todoTvChargePerson.visibility = View.GONE
+                } else {
+                    binding.todoTvChargePerson.visibility = View.VISIBLE
+                    binding.todoTvChargePerson.text = "${res.mem_name.toString()} 담당"
+                }
             }
 
             override fun onFailure(call: Call<ToDoVo>, t: Throwable) {
@@ -77,22 +97,78 @@ class TodoDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun todoCmpl(){
+    private fun getCmpl() {
+        RetrofitClient.api.getCmpl(cmpl_seq.toInt()).enqueue(object : Callback<ToDoCompleteVO> {
+            override fun onResponse(
+                call: Call<ToDoCompleteVO>,
+                response: Response<ToDoCompleteVO>
+            ) {
+                binding.textView33.text = "완료"
+                val res = response.body()
+                binding.todoDetailContent.text = res!!.todo_content.toString()
+                binding.todoDetailCb.isChecked = res.cmpl_strange == "Y"
+                binding.todoDetailEtMemo.setText(res.cmpl_memo)
+            }
+
+            override fun onFailure(call: Call<ToDoCompleteVO>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun todoCmpl() {
         val memo = binding.todoDetailEtMemo.text.toString()
-        var strange: String
-        if(binding.todoDetailCb.isChecked){
-            strange = "Y"
-        }else{
-            strange = "N"
+        var strange: String = if (binding.todoDetailCb.isChecked) {
+            "Y"
+        } else {
+            "N"
         }
-        val req = ToDoCompleteVO(todo_seq.toInt(), memId,"", memo, strange, cate_seq.toInt())
-        RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody>{
+        val req = ToDoCompleteVO(todo_seq.toInt(), memId, "", memo, strange, cate_seq.toInt())
+        RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val res = response.body()?.string()
-                if(res.toString() == "1"){
+                if (res.toString() == "1") {
                     finish()
-                }else{
-                    Toast.makeText(this@TodoDetailActivity, "완료에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@TodoDetailActivity, "완료에 실패했습니다.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun todoModify() {
+        val memo = binding.todoDetailEtMemo.text.toString()
+        var strange: String = if (binding.todoDetailCb.isChecked) {
+            "Y"
+        } else {
+            "N"
+        }
+        val req = ToDoCompleteVO(
+            cmpl_seq.toInt(),
+            todo_seq.toInt(),
+            memId,
+            null,
+            "",
+            memo,
+            strange,
+            cate_seq.toInt(),
+            null,
+            null,
+            null
+        )
+        RetrofitClient.api.todoModify(req).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val res = response.body()?.string()
+                if (res.toString() == "1") {
+                    finish()
+                } else {
+                    Toast.makeText(this@TodoDetailActivity, "수정에 실패했습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 

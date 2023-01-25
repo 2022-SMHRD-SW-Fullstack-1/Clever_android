@@ -7,31 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
 import com.example.clever.model.NoticeVO
 import com.example.clever.view.home.notice.NoticeContentActivity
+import com.example.clever.view.home.notice.NoticeFolderInActivity
 
 class NoticeListAdapter(val context: Context, val noticeList: ArrayList<NoticeVO>) :
     RecyclerView.Adapter<NoticeListAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val noticeFolderRvTitle: TextView
         val noticeFolderRvContent: TextView
         val noticeFolderRvName: TextView
         val noticeFolderRvDate: TextView
         val noticeClGoDetail: ConstraintLayout
-
         init {
-
             noticeFolderRvTitle = itemView.findViewById(R.id.noticeFolderRvTitle)
             noticeFolderRvContent = itemView.findViewById(R.id.noticeFolderRvContent)
             noticeFolderRvName = itemView.findViewById(R.id.noticeFolderRvName)
             noticeFolderRvDate = itemView.findViewById(R.id.noticeFolderRvDate)
             noticeClGoDetail = itemView.findViewById(R.id.noticeClGoDetail)
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,9 +52,12 @@ class NoticeListAdapter(val context: Context, val noticeList: ArrayList<NoticeVO
         holder.noticeFolderRvDate.text = "${year}년 ${month}월 ${day}일 작성"
 
         holder.noticeClGoDetail.setOnClickListener {
+            val activity = context as NoticeFolderInActivity
+            val cate_name = activity.intent.getStringExtra("cate_name")
             val intent = Intent(context, NoticeContentActivity::class.java)
             intent.putExtra("notice_seq", "${noticeList[position].notice_seq}")
             intent.putExtra("cate_seq", "${noticeList[position].cate_seq}")
+            intent.putExtra("cate_name", cate_name)
             context.startActivity(intent)
         }
     }

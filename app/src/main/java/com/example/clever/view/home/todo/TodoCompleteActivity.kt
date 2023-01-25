@@ -67,24 +67,26 @@ class TodoCompleteActivity : AppCompatActivity() {
     }
 
     private fun getToDoCmplList() {
-        val req = ToDoCompleteVO(todo_seq.toInt(), 0, null)
-        RetrofitClient.api.getToDoCmplList(req).enqueue(object : Callback<List<ToDoCompleteVO>>{
-            override fun onResponse(
-                call: Call<List<ToDoCompleteVO>>,
-                response: Response<List<ToDoCompleteVO>>
-            ) {
-                val res = response.body()
-                for(i in 0 until res!!.size){
-                    todoCmplList.add(res[i])
-                    Log.d("완료", todoCmplList[i].toString())
+        RetrofitClient.api.getToDoCmplList(todo_seq.toInt())
+            .enqueue(object : Callback<List<ToDoCompleteVO>> {
+                override fun onResponse(
+                    call: Call<List<ToDoCompleteVO>>,
+                    response: Response<List<ToDoCompleteVO>>
+                ) {
+                    val res = response.body()
+                    if (res!!.isNotEmpty()) {
+                        for (i in 0 until res!!.size) {
+                            todoCmplList.add(res[i])
+                        }
+                        todoCmplList.reverse()
+                        adapter.notifyDataSetChanged()
+                    }
                 }
-                adapter.notifyDataSetChanged()
-            }
 
-            override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+                override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
 
     }
 }

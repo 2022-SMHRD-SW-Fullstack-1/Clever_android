@@ -61,6 +61,8 @@ class NoticeFolderInActivity : AppCompatActivity() {
             finish()
         }
 
+
+
         binding.noticeFolderBtn.setOnClickListener {
             val intent = Intent(this@NoticeFolderInActivity, NoticeWriteActivity::class.java)
             intent.putExtra("cate_seq", cate_seq)
