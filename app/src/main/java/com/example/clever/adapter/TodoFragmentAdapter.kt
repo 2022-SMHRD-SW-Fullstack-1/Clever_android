@@ -28,14 +28,14 @@ class TodoFragmentAdapter(val context: Context, val categoryList: ArrayList<Cate
 
         val todoCategoryTvTitle: TextView
         val todoCategoryTvState: TextView
-        val todoCategoryImgPin: ImageView
         val todoCategoryCl: ConstraintLayout
+        val todoCategoryImgPin: ImageView
 
         init {
             todoCategoryTvTitle = itemView.findViewById(R.id.todoCategoryTvTitle)
             todoCategoryTvState = itemView.findViewById(R.id.todoCategoryTvState)
-            todoCategoryImgPin = itemView.findViewById(R.id.todoCategoryImgPin)
             todoCategoryCl = itemView.findViewById(R.id.todoCategoryCl)
+            todoCategoryImgPin = itemView.findViewById(R.id.todoCategoryImgPin)
         }
     }
 
@@ -53,6 +53,10 @@ class TodoFragmentAdapter(val context: Context, val categoryList: ArrayList<Cate
             intent.putExtra("cate_seq", "${categoryList[position].cate_seq}")
             intent.putExtra("cate_name", categoryList[position].cate_name)
             context.startActivity(intent)
+        }
+
+        holder.todoCategoryImgPin.setOnClickListener {
+
         }
 
         var all: Int

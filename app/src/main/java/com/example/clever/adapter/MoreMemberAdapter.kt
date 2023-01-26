@@ -96,6 +96,7 @@ class MoreMemberAdapter(val context: Context, private val memberList: ArrayList<
                         val res = response.body()?.string()
                         if(res.toString() == "1"){
                             Toast.makeText(context, "${memberList[position].mem_name} 을/를 추방하였습니다.", Toast.LENGTH_SHORT).show()
+                            alertDialog.dismiss()
                         }else{
                             Toast.makeText(context, "추방에 실패했습니다.", Toast.LENGTH_SHORT).show()
                         }

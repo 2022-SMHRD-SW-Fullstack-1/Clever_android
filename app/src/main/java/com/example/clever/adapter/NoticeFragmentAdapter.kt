@@ -127,6 +127,7 @@ class NoticeFragmentAdapter(val context: Context, val categoryList: ArrayList<Ca
                                 "${categoryList[position].cate_name} 폴더를 삭제했습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            alertDialog.dismiss()
                         } else {
                             Toast.makeText(
                                 context,
