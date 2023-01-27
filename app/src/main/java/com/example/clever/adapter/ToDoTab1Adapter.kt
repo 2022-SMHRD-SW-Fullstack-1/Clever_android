@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
 import com.example.clever.model.ToDoCompleteVO
@@ -20,16 +17,18 @@ import com.example.clever.model.ToDoVo
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.utils.Time
 import com.example.clever.view.home.todo.TodoDetailActivity
-import com.example.clever.view.home.todo.TodoListActivity
-import com.example.clever.view.home.todo.TodoTab1Fragment
 import okhttp3.ResponseBody
-import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
+class ToDoTab1Adapter(
+    val context: Context,
+    val todoList: ArrayList<ToDoVo>,
+    val onClickDeleteIcon: (todo: ToDoVo) -> Unit
+) :
     RecyclerView.Adapter<ToDoTab1Adapter.ViewHolder>() {
+
     lateinit var loginSp: SharedPreferences
     private lateinit var memId: String
     val time = Time.getTime()
@@ -61,10 +60,11 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
         loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
 
+
         holder.todolistTvTitle.text = todoList[position].todo_title
         holder.todolistTvName.text = todoList[position].mem_name
 
-        if(todoList[position].todo_method == "사진"){
+        if (todoList[position].todo_method == "사진") {
             holder.todolistImgType.setImageResource(R.drawable.camera)
             if (todoList[position].select_day.toString() == time) {
                 holder.todolistImgCheck.setOnClickListener {
@@ -88,7 +88,8 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
                             response: Response<ResponseBody>
                         ) {
                             val res = response.body()?.string()
-                            Log.d("todoList adapter api", todoList.size.toString())
+                            Log.d("todoList adapter api", "네모")
+                            onClickDeleteIcon.invoke(todoList[position])
                         }
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -97,7 +98,7 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
                     })
                 }
             }
-        }else{
+        } else {
             holder.todolistImgType.setImageResource(R.drawable.todo_check)
             if (todoList[position].select_day.toString() == time) {
                 holder.todolistImgCheck.setOnClickListener {
@@ -116,7 +117,8 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
                             response: Response<ResponseBody>
                         ) {
                             val res = response.body()?.string()
-                            Log.d("todoList adapter api", todoList.size.toString())
+                            onClickDeleteIcon.invoke(todoList[position])
+                            Log.d("todoList adapter api", "네모")
                         }
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -128,10 +130,12 @@ class ToDoTab1Adapter(val context: Context, val todoList: ArrayList<ToDoVo>) :
         }
 
         holder.todoTab1Cl.setOnClickListener {
-            val intent = Intent(context, TodoDetailActivity::class.java)
-            intent.putExtra("todo_seq", todoList[position].todo_seq.toString())
-            intent.putExtra("cate_seq", todoList[position].cate_seq.toString())
-            context.startActivity(intent)
+            if (todoList[position].select_day.toString() == time) {
+                val intent = Intent(context, TodoDetailActivity::class.java)
+                intent.putExtra("todo_seq", todoList[position].todo_seq.toString())
+                intent.putExtra("cate_seq", todoList[position].cate_seq.toString())
+                context.startActivity(intent)
+            }
         }
     }
 

@@ -68,9 +68,24 @@ interface RetrofitInterface {
         @Body todo_info: ToDoVo
     ): Call<List<ToDoVo>>
 
+    @FormUrlEncoded
+    @POST("android/getMyToDo")
+    fun getMyToDo(
+        @Field("group_seq") group_seq: Int,
+        @Field("mem_id") mem_id: String,
+    ): Call<List<ToDoVo>>
+
     @POST("android/getToDoComplete")
     fun getToDoComplete(
         @Body todo_info: ToDoCompleteVO
+    ): Call<List<ToDoCompleteVO>>
+
+    @FormUrlEncoded
+    @POST("android/getMyToDoComplete")
+    fun getMyToDoComplete(
+        @Field("group_seq") group_seq:Int,
+        @Field("mem_id") mem_id: String,
+        @Field("selectDate") selectDate: String,
     ): Call<List<ToDoCompleteVO>>
 
     @POST("android/getToDo")

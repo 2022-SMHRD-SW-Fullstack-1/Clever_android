@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.clever.R
 import com.example.clever.databinding.ActivityHomeBinding
 import com.example.clever.model.Member
@@ -37,8 +38,6 @@ class HomeActivity : AppCompatActivity() {
 
         val groupSeq = intent.getStringExtra("group_seq")
         val groupName = intent.getStringExtra("group_name")
-
-        Log.d("home ac", groupSeq.toString())
 
         groupSp = getSharedPreferences("groupInfo", Context.MODE_PRIVATE)
         group_seq = groupSp.getString("group_seq", "").toString()

@@ -85,6 +85,7 @@ class CalendarFragment : Fragment() {
             val intent = Intent(requireContext(), CalculateActivity::class.java)
             intent.putExtra("mem_id", memId)
             intent.putExtra("group_seq", group_seq)
+            intent.putExtra("selectedDate", selectedDate)
             requireContext().startActivity(intent)
         }
 

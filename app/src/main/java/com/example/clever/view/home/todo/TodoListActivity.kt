@@ -39,9 +39,12 @@ class TodoListActivity : AppCompatActivity() {
 
     lateinit var groupSp: SharedPreferences
     lateinit var group_seq: String
+    lateinit var loginSp: SharedPreferences
+    private lateinit var memId:String
 
     lateinit var cate_seq: String
     lateinit var cate_name: String
+    lateinit var cate_type: String
 
     var selectDate: String = Time.getTime()
 
@@ -56,9 +59,12 @@ class TodoListActivity : AppCompatActivity() {
 
         groupSp = getSharedPreferences("groupInfo", Context.MODE_PRIVATE)
         group_seq = groupSp.getString("group_seq", "").toString()
+        loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+        memId = loginSp.getString("mem_id", "").toString()
 
         cate_seq = intent.getStringExtra("cate_seq").toString()
         cate_name = intent.getStringExtra("cate_name").toString()
+        cate_type = intent.getStringExtra("cate_type").toString()
 
         binding = ActivityTodoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -181,8 +187,8 @@ class TodoListActivity : AppCompatActivity() {
 
             selectDate = "${year}-${month}-${day}"
 
-            todoTab1Fragment.getTodoList(cate_seq, selectDate)
-            todoTab2Fragment.getCmplList(cate_seq, selectDate)
+            todoTab1Fragment.getTodoList(cate_seq, selectDate, cate_type)
+            todoTab2Fragment.getCmplList(cate_seq, selectDate, cate_type, group_seq.toInt(), memId)
 
             binding.todoCalendar.removeDecorators()
             binding.todoCalendar.addDecorators(
@@ -199,9 +205,9 @@ class TodoListActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 if (position == 0) {
-                    todoTab1Fragment.getTodoList(cate_seq, selectDate)
+                    todoTab1Fragment.getTodoList(cate_seq, selectDate, cate_type)
                 } else {
-                    todoTab2Fragment.getCmplList(cate_seq, selectDate)
+                    todoTab2Fragment.getCmplList(cate_seq, selectDate, cate_type, group_seq.toInt(), memId)
                 }
             }
         })

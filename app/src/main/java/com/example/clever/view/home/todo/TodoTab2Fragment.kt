@@ -1,5 +1,7 @@
 package com.example.clever.view.home.todo
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -63,28 +65,54 @@ class TodoTab2Fragment : Fragment() {
         return binding.root
     }
 
-    fun getCmplList(cate_seq: String, selectDate: String) {
+    fun getCmplList(
+        cate_seq: String,
+        selectDate: String,
+        cate_type: String,
+        group_seq: Int,
+        memId: String
+    ) {
         val req = ToDoCompleteVO(cate_seq.toInt(), selectDate)
-        RetrofitClient.api.getToDoComplete(req)
-            .enqueue(object : Callback<List<ToDoCompleteVO>> {
-                override fun onResponse(
-                    call: Call<List<ToDoCompleteVO>>,
-                    response: Response<List<ToDoCompleteVO>>
-                ) {
-                    cmplList.clear()
-                    val res = response.body()
-                    for (i in 0 until res!!.size) {
-                        val date = res[i].cmpl_time
-                        val dateSub = date!!.substring(0, 10)
-                        if (selectDate == dateSub) cmplList.add(res[i])
+        if (cate_type == "Default") {
+            RetrofitClient.api.getMyToDoComplete(group_seq, memId, selectDate)
+                .enqueue(object : Callback<List<ToDoCompleteVO>> {
+                    override fun onResponse(
+                        call: Call<List<ToDoCompleteVO>>,
+                        response: Response<List<ToDoCompleteVO>>
+                    ) {
+                        cmplList.clear()
+                        val res = response.body()
+                        for (i in 0 until res!!.size) {
+                            cmplList.add(res[i])
+                        }
+                        if (viewPoint) adapter.notifyDataSetChanged()
                     }
-                    if(viewPoint) adapter.notifyDataSetChanged()
-                }
 
-                override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
+                    override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        } else {
+            RetrofitClient.api.getToDoComplete(req)
+                .enqueue(object : Callback<List<ToDoCompleteVO>> {
+                    override fun onResponse(
+                        call: Call<List<ToDoCompleteVO>>,
+                        response: Response<List<ToDoCompleteVO>>
+                    ) {
+                        cmplList.clear()
+                        val res = response.body()
+                        for (i in 0 until res!!.size) {
+                            val date = res[i].cmpl_time
+                            val dateSub = date!!.substring(0, 10)
+                            if (selectDate == dateSub) cmplList.add(res[i])
+                        }
+                        if (viewPoint) adapter.notifyDataSetChanged()
+                    }
+
+                    override fun onFailure(call: Call<List<ToDoCompleteVO>>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        }
     }
-
 }

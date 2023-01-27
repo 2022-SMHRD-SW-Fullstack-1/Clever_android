@@ -38,6 +38,18 @@ class CalculateActivity : AppCompatActivity() {
         binding = ActivityCalculateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val selectedDate = intent.getStringExtra("selectedDate").toString()
+        binding.calEtStartYear.setText(selectedDate.substring(0, 4))
+        binding.calEtStartMonth.setText(selectedDate.substring(5, 7))
+        binding.calEtStartDay.setText("01")
+        binding.calEtEndYear.setText(selectedDate.substring(0, 4))
+        binding.calEtEndMonth.setText(selectedDate.substring(5, 7))
+        binding.calEtEndDay.setText(when(selectedDate.substring(5,7)){
+            "01", "03", "05", "07", "08", "10", "12" -> "31"
+            "04", "06", "09", "11" -> "30"
+            else -> "29"
+        })
+
         binding.calculateCl.setOnTouchListener { _, _ ->
             hideKeyboard()
             false
@@ -83,7 +95,7 @@ class CalculateActivity : AppCompatActivity() {
                     val hourly = binding.calEtHourly.text.toString().toInt()
                     var salary = attTime * hourly / 10
                     binding.calTvSalary.text = "${dec.format(salary.toInt() * 10)}원"
-                }else{
+                } else {
                     binding.calTvSalary.text = "0원"
                 }
             }
@@ -135,7 +147,7 @@ class CalculateActivity : AppCompatActivity() {
                             val hourly = binding.calEtHourly.text.toString().toInt()
                             var salary = attTime * hourly / 10
                             binding.calTvSalary.text = "${dec.format(salary.toInt() * 10)}원"
-                        }else{
+                        } else {
                             binding.calTvSalary.text = "0원"
                         }
                     }

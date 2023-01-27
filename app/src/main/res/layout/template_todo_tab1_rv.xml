@@ -22,11 +22,11 @@
         android:id="@+id/todolistImgCheck"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:tint="@color/gray"
         app:layout_constraintBottom_toBottomOf="@+id/todolistImgType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/todolistImgType"
-        app:srcCompat="@drawable/ic_outline_check_box_24" />
+        app:srcCompat="@drawable/ic_outline_check_box_24"
+        app:tint="@color/gray" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todoTab1Cl"

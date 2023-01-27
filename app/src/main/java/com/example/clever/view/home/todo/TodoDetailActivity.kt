@@ -123,22 +123,29 @@ class TodoDetailActivity : AppCompatActivity() {
         } else {
             "N"
         }
-        val req = ToDoCompleteVO(todo_seq.toInt(), memId, "", memo, strange, cate_seq.toInt())
-        RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                val res = response.body()?.string()
-                if (res.toString() == "1") {
-                    finish()
-                } else {
-                    Toast.makeText(this@TodoDetailActivity, "완료에 실패했습니다.", Toast.LENGTH_SHORT)
-                        .show()
+        if (strange == "Y" && memo == "") {
+            Toast.makeText(this@TodoDetailActivity, "메모를 입력해 주세요 !", Toast.LENGTH_SHORT).show()
+        } else {
+            val req = ToDoCompleteVO(todo_seq.toInt(), memId, "", memo, strange, cate_seq.toInt())
+            RetrofitClient.api.todoCmpl(req).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    val res = response.body()?.string()
+                    if (res.toString() == "1") {
+                        finish()
+                    } else {
+                        Toast.makeText(this@TodoDetailActivity, "완료에 실패했습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
     }
 
     private fun todoModify() {
