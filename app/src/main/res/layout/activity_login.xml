@@ -5,6 +5,7 @@
     android:id="@+id/loginCl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mainColor"
     tools:context=".view.LoginActivity">
 
     <Button
@@ -12,11 +13,12 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_main"
+        android:background="@drawable/background_radius"
         android:elevation="10dp"
         android:text="로그인"
-        android:textColor="@color/white"
+        android:textColor="@color/mainColor"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/loginClGoPw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,7 +62,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="클레버"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +121,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:buttonTint="@color/white"
         android:text="자동 로그인"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/loginBtnLogin"
         app:layout_constraintStart_toStartOf="@+id/loginBtnLogin" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="398dp"
+        android:layout_height="267dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginEtPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/logo_notitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

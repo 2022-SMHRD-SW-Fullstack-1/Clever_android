@@ -53,7 +53,7 @@ class MainSplashActivity : AppCompatActivity() {
                 autoLogin()
             }
 
-        }, 1000)
+        }, 2500)
     }
 
     private fun autoLogin(){

@@ -81,6 +81,42 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Container
+        // binding.mainRv
+
+        // Template
+        // template_main_rv
+
+        // Item
+        getGroup()
+
+        // Adapter
+        adapter = MainAdapter(
+            this@MainActivity,
+            groupList
+        )
+
+        // Adapter Container 연결
+        binding.mainRv.adapter = adapter
+        binding.mainRv.layoutManager = GridLayoutManager(this@MainActivity, 1)
+        binding.mainRv.addItemDecoration(MainRvDecorator(16))
+
+        // Event 처리
+        binding.mainBtnJoinGroup.setOnClickListener {
+            joinGroup()
+        }
+
+        binding.mainImgProfile.setOnClickListener {
+            val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     // 참여중이 group 가져오기
     private fun getGroup() {
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
