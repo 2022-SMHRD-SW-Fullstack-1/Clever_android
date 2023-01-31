@@ -3,11 +3,16 @@ package com.example.clever.view.home.todo
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.example.clever.R
 import com.example.clever.databinding.ActivityTodoDetailBinding
 import com.example.clever.model.ToDoCompleteVO
@@ -17,6 +22,10 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TodoDetailActivity : AppCompatActivity() {
 
@@ -33,6 +42,12 @@ class TodoDetailActivity : AppCompatActivity() {
     lateinit var cmpl_seq: String
 
     var todoModify = false
+
+    val REQUEST_IMAGE_CAPTURE = 1
+
+    val REQUEST_TAKE_PHOTO = 10
+    private var imageUri: Uri? = null
+    private var mCurrentPhotoPath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +88,79 @@ class TodoDetailActivity : AppCompatActivity() {
             intent.putExtra("todo_title", todo_title)
             startActivity(intent)
         }
+
+        binding.todoDetailTvUpLoad.setOnClickListener {
+            captureCamera()
+        }
+    }
+
+    private fun captureCamera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(packageManager) != null) {
+
+            var photoFile: File? = null
+            try {
+                photoFile = createImageFile()
+            } catch (ex: IOException) {
+                Log.e("captureCamera Error", ex.toString())
+                return
+            }
+            if (photoFile != null) { // getUriForFile의 두 번째 인자는 Manifest provier의 authorites와 일치해야 함
+                val providerURI = FileProvider.getUriForFile(this, packageName, photoFile)
+                imageUri = providerURI;
+                // 인텐트에 전달할 때는 FileProvier의 Return값인 content://로만!!, providerURI의 값에 카메라 데이터를 넣어 보냄
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerURI)
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    fun createImageFile(): File? { // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_$timeStamp.jpg"
+        var imageFile: File? = null
+        val storageDir = File(
+            Environment.getExternalStorageDirectory().toString() + "/Pictures",
+            "Wimmy"
+        )
+        if (!storageDir.exists()) {
+            Log.i("mCurrentPhotoPath1", storageDir.toString())
+            storageDir.mkdirs()
+        }
+        imageFile = File(storageDir, imageFileName)
+        mCurrentPhotoPath = imageFile.absolutePath
+        return imageFile
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            REQUEST_TAKE_PHOTO -> {
+                if (resultCode == RESULT_OK) {
+                    try {
+                        galleryAddPic();
+                    } catch (e: Exception) {
+                        Log.e("REQUEST_TAKE_PHOTO", e.toString());
+                    }
+                } else {
+                    Toast.makeText(this@TodoDetailActivity, "사진찍기를 취소하였습니다.", Toast.LENGTH_SHORT)
+                        .show();
+                }
+            }
+        }
+    }
+
+    private fun galleryAddPic() {
+        val mediaScanIntent: Intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        // 해당 경로에 있는 파일을 객체화(새로 파일을 만든다는 것으로 이해하면 안 됨)
+        val f: File = File(mCurrentPhotoPath);
+        val contentUri: Uri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        sendBroadcast(mediaScanIntent);
+        binding.imageView17.setImageURI(imageUri);
+        Toast.makeText(this, "사진이 앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     private fun getTodo() {

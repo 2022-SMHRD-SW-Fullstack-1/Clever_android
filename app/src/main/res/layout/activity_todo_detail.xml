@@ -81,7 +81,6 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_radius_gray"
         android:elevation="10dp"
-        android:padding="32dp"
         app:layout_constraintEnd_toEndOf="@+id/todoDetailClCpl"
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/todoDetailClCpl">
@@ -90,6 +89,7 @@
             android:id="@+id/imageView12"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="32dp"
             android:tint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,12 +113,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
             android:text="등록하기"
             android:textColor="@color/black"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView12"
             app:layout_constraintStart_toStartOf="@+id/imageView12"
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

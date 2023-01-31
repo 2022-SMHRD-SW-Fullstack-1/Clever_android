@@ -1,5 +1,6 @@
 package com.example.clever.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -56,10 +57,9 @@ class ToDoTab1Adapter(
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         loginSp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
-
 
         holder.todolistTvTitle.text = todoList[position].todo_title
         holder.todolistTvName.text = todoList[position].mem_name
@@ -68,11 +68,6 @@ class ToDoTab1Adapter(
             holder.todolistImgType.setImageResource(R.drawable.camera)
             if (todoList[position].select_day.toString() == time) {
                 holder.todolistImgCheck.setOnClickListener {
-
-                    // 카메라 키기
-                    // 카메라 키기
-                    // 카메라 키기
-                    // 카메라 키기
 
                     val req = ToDoCompleteVO(
                         todoList[position].todo_seq,
@@ -118,7 +113,7 @@ class ToDoTab1Adapter(
                         ) {
                             val res = response.body()?.string()
                             onClickDeleteIcon.invoke(todoList[position])
-                            Log.d("todoList adapter api", "네모")
+                                Log.d("todoList adapter api", "네모")
                         }
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

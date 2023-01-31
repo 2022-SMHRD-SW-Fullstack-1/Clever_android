@@ -6,8 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
-import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -71,7 +69,10 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
             startActivity(intent)
         }
+
     }
+
+
 
     // 화면 클릭시 키보드 내리기
     private fun hideKeyboard() {
@@ -131,4 +132,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

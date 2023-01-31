@@ -12,7 +12,7 @@
         android:id="@+id/loginBtnLogin"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/background_radius"
         android:elevation="10dp"
         android:text="로그인"
@@ -56,25 +56,12 @@
         app:layout_constraintStart_toStartOf="@+id/loginBtnLogin" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="클레버"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/loginTvJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:text="회원가입"
-        android:textColor="@color/mainColor"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -120,7 +107,7 @@
         android:id="@+id/loginCbAutoLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:buttonTint="@color/white"
         android:text="자동 로그인"
         android:textColor="@color/white"
@@ -129,12 +116,12 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="398dp"
-        android:layout_height="267dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginEtPhone"
+        android:layout_width="255dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/logo_notitle" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
