@@ -103,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
+                        Log.d("login", res.toString())
                         if (res != "") {
                             val editorAuto = autoSp.edit()
                             if (binding.loginCbAutoLogin.isChecked) {
@@ -113,7 +114,9 @@ class LoginActivity : AppCompatActivity() {
                             }
                             val editorMem = loginSp.edit()
                             val memberInfo = Gson().fromJson(res, Member::class.java)
+                            Log.d("login 2", memberInfo.toString())
                             editorMem.putString("mem_id", memberInfo.mem_id)
+                            Log.d("login 3", memberInfo.mem_id)
                             editorMem.putString("mem_name", memberInfo.mem_name)
                             editorMem.apply()
 

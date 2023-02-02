@@ -17,7 +17,7 @@ interface RetrofitInterface {
     ): Call<ResponseBody>
 
     // 로그인
-    @POST("login")
+    @POST("android/login")
     fun login(
         @Body login_info: Member
     ): Call<ResponseBody>

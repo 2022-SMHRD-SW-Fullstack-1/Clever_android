@@ -291,6 +291,7 @@
         android:hint="시급입력"
         android:inputType="number"
         android:padding="4dp"
+        android:text="9620"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="@+id/calEtAttTime"
         app:layout_constraintStart_toEndOf="@+id/imageView16"
