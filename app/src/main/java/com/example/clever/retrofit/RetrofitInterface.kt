@@ -216,4 +216,26 @@ interface RetrofitInterface {
     fun todoModify(
         @Body cmpl_info: ToDoCompleteVO
     ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("android/getTodayAtt")
+    fun getTodayAtt(
+        @Field("group_seq") group_seq: Int,
+        @Field("mem_id") mem_id: String,
+        @Field("att_date") att_date: String,
+    ): Call<AttendanceVO>
+
+    @FormUrlEncoded
+    @POST("android/attStart")
+    fun attStart(
+        @Field("att_seq") att_seq: Int,
+        @Field("att_real_start_time") att_real_start_time: String,
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("android/attEnd")
+    fun attEnd(
+        @Field("att_seq") att_seq: Int,
+        @Field("att_real_end_time") att_real_end_time: String,
+    ): Call<ResponseBody>
 }
