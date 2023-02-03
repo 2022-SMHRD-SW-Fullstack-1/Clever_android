@@ -24,8 +24,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     lateinit var loginSp: SharedPreferences
-    private lateinit var memId:String
-    private lateinit var memName:String
+    private lateinit var memId: String
+    private lateinit var memName: String
     lateinit var autoSp: SharedPreferences
     private lateinit var autoLoginPhone: String
     private lateinit var autoLoginPw: String
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         // 로그인한 유저 정보 저장
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
-        memName = loginSp.getString("mem_name","").toString()
+        memName = loginSp.getString("mem_name", "").toString()
 
         // 자동로그인 정보 저장
         autoSp = getSharedPreferences("autoLoginInfo", Context.MODE_PRIVATE)
@@ -73,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
     // 화면 클릭시 키보드 내리기
     private fun hideKeyboard() {
         if (this.currentFocus != null) {
@@ -87,53 +86,57 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+
         val phone = binding.loginEtPhone.text.toString().trim()
         val pw = binding.loginEtPw.text.toString().trim()
 
-        if (phone == "") {
-            Toast.makeText(this@LoginActivity, "휴대폰번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-        } else {
-            if (pw == "") {
-                Toast.makeText(this@LoginActivity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else {
-                val loginInfo = Member(phone, pw)
-                RetrofitClient.api.login(loginInfo).enqueue(object : Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
-                        val res = response.body()?.string()
-                        Log.d("login", res.toString())
-                        if (res != "") {
-                            val editorAuto = autoSp.edit()
-                            if (binding.loginCbAutoLogin.isChecked) {
-                                editorAuto.putString("loginPhone", phone)
-                                editorAuto.putString("loginPw", pw)
-                                editorAuto.putBoolean("loginCb", true)
-                                editorAuto.apply()
-                            }
-                            val editorMem = loginSp.edit()
-                            val memberInfo = Gson().fromJson(res, Member::class.java)
-                            Log.d("login 2", memberInfo.toString())
-                            editorMem.putString("mem_id", memberInfo.mem_id)
-                            Log.d("login 3", memberInfo.mem_id)
-                            editorMem.putString("mem_name", memberInfo.mem_name)
-                            editorMem.apply()
-
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }else{
-                            Toast.makeText(this@LoginActivity, "휴대폰번호 또는 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        t.localizedMessage?.let { Log.d("login", it) }
-                    }
-                })
-            }
-        }
+//        if (phone == "") {
+//            Toast.makeText(this@LoginActivity, "휴대폰번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+//        } else {
+//            if (pw == "") {
+//                Toast.makeText(this@LoginActivity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+//            } else {
+//                val loginInfo = Member(phone, pw)
+//                RetrofitClient.api.login(loginInfo).enqueue(object : Callback<ResponseBody> {
+//                    override fun onResponse(
+//                        call: Call<ResponseBody>,
+//                        response: Response<ResponseBody>
+//                    ) {
+//                        val res = response.body()?.string()
+//                        Log.d("login", res.toString())
+//                        if (res != "") {
+//                            val editorAuto = autoSp.edit()
+//                            if (binding.loginCbAutoLogin.isChecked) {
+//                                editorAuto.putString("loginPhone", phone)
+//                                editorAuto.putString("loginPw", pw)
+//                                editorAuto.putBoolean("loginCb", true)
+//                                editorAuto.apply()
+//                            }
+//                            val editorMem = loginSp.edit()
+//                            val memberInfo = Gson().fromJson(res, Member::class.java)
+//                            Log.d("login 2", memberInfo.toString())
+//                            editorMem.putString("mem_id", memberInfo.mem_id)
+//                            Log.d("login 3", memberInfo.mem_id)
+//                            editorMem.putString("mem_name", memberInfo.mem_name)
+//                            editorMem.apply()
+//
+//                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                        }else{
+//                            Toast.makeText(this@LoginActivity, "휴대폰번호 또는 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                        t.localizedMessage?.let { Log.d("login", it) }
+//                    }
+//                })
+//            }
+//        }
     }
 
 
