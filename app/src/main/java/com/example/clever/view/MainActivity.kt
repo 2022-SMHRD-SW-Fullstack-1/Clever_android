@@ -122,8 +122,7 @@ class MainActivity : AppCompatActivity() {
         loginSp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
         memId = loginSp.getString("mem_id", "").toString()
 
-        RetrofitClient.api.getGroup(Member("01075780324")).enqueue(object : Callback<List<GroupVO>> {
-//            RetrofitClient.api.getGroup(Member(memId)).enqueue(object : Callback<List<GroupVO>> {
+            RetrofitClient.api.getGroup(Member(memId)).enqueue(object : Callback<List<GroupVO>> {
             override fun onResponse(call: Call<List<GroupVO>>, response: Response<List<GroupVO>>) {
                 val res = response.body()
                 groupList.clear()
