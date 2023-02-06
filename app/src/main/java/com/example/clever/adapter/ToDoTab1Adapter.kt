@@ -113,7 +113,6 @@ class ToDoTab1Adapter(
                         ) {
                             val res = response.body()?.string()
                             onClickDeleteIcon.invoke(todoList[position])
-                                Log.d("todoList adapter api", "네모")
                         }
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

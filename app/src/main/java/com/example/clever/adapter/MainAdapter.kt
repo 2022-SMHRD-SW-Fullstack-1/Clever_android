@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clever.R
 import com.example.clever.model.GroupVO
+import com.example.clever.model.ToDoVo
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.home.HomeActivity
 import okhttp3.ResponseBody
@@ -24,7 +25,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO>) :
+class MainAdapter(
+    val context: Context,
+    private val groupList: ArrayList<GroupVO>,
+    val onClickDeleteIcon: (group: GroupVO) -> Unit
+) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     lateinit var loginSp: SharedPreferences
@@ -79,15 +84,20 @@ class MainAdapter(val context: Context, private val groupList: ArrayList<GroupVO
                 val group_seq = groupList[position].group_seq
 
                 val req = GroupVO(group_seq!!.toInt(), memId)
-                RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody>{
+                RetrofitClient.api.groupOut(req).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
                         val res = response.body()?.string()
                         Log.d("groupOut", res.toString())
-                        if(res.toString() == "1"){
-                            Toast.makeText(context, "${groupList[position].group_name} 을/를 나갔습니다.", Toast.LENGTH_SHORT).show()
+                        if (res.toString() == "1") {
+                            Toast.makeText(
+                                context,
+                                "${groupList[position].group_name} 을/를 나갔습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            onClickDeleteIcon.invoke(groupList[position])
                             alertDialog.dismiss()
                         }
                     }

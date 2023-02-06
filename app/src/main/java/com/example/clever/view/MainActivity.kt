@@ -19,6 +19,7 @@ import com.example.clever.databinding.ActivityMainBinding
 import com.example.clever.decorator.other.MainRvDecorator
 import com.example.clever.model.GroupVO
 import com.example.clever.model.Member
+import com.example.clever.model.ToDoVo
 import com.example.clever.retrofit.RetrofitClient
 import com.example.clever.view.profile.ProfileActivity
 import okhttp3.ResponseBody
@@ -61,7 +62,10 @@ class MainActivity : AppCompatActivity() {
         // Adapter
         adapter = MainAdapter(
             this@MainActivity,
-            groupList
+            groupList,
+            onClickDeleteIcon = {
+                deleteTask(it)
+            }
         )
 
         // Adapter Container 연결
@@ -98,7 +102,10 @@ class MainActivity : AppCompatActivity() {
         // Adapter
         adapter = MainAdapter(
             this@MainActivity,
-            groupList
+            groupList,
+            onClickDeleteIcon = {
+                deleteTask(it)
+            }
         )
 
         // Adapter Container 연결
@@ -115,6 +122,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun deleteTask(group: GroupVO) {
+        groupList.remove(group)
+        binding.mainTvCount.text = groupList.size.toString()
+        adapter?.notifyDataSetChanged()
     }
 
     // 참여중이 group 가져오기
